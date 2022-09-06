@@ -12,7 +12,7 @@ export class Types {
 	@Column({ nullable: true })
 	description: string;
 
-	@Column({ default: false })
+	@Column({ default: true })
 	isActive: boolean;
 
 	constructor() {
