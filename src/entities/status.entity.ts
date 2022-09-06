@@ -6,7 +6,7 @@ class Status{
     @PrimaryGeneratedColumn('uuid')
     id: string
 
-    @Column({unique: true})
+    @Column()
     name: string
 
 }
