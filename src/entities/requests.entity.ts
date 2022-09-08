@@ -14,11 +14,13 @@ export class Requests {
 	@Column({ nullable: true })
 	description: string;
 
-	@ManyToOne((type) => Institutions, (institution) => institution.requests, {onDelete: "SET NULL"})
-	institution: Institutions
-  
-	@OneToMany(() => Types, (types) => types.request)
-	types: Types[];
+	@ManyToOne((type) => Institutions, (institution) => institution.requests, {
+		onDelete: "SET NULL",
+	})
+	institution: Institutions;
+
+	@ManyToOne(() => Types, (types) => types.request, { nullable: false })
+	type: Types;
 
 	constructor() {
 		if (!this.id) {
