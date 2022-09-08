@@ -1,4 +1,5 @@
-import { Column, Entity, ManyToOne, OneToMany, PrimaryColumn } from "typeorm";
+import { Column, Entity, OneToMany, PrimaryColumn } from "typeorm";
+
 import { v4 as uuid } from "uuid";
 import { Requests } from "./requests.entity";
 import { Itens } from "./objects.entity";
@@ -17,8 +18,8 @@ export class Types {
 	@Column({ default: true })
 	isActive: boolean;
 
-	@ManyToOne(() => Requests, (request) => request.types, { nullable: false })
-	request: Requests;
+	@OneToMany(() => Requests, (requests) => requests.type)
+	request: Requests[];
 
 	@OneToMany(()=> Itens, Itens => Itens.type)
     objects: Itens[]
