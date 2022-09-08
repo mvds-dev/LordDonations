@@ -1,5 +1,6 @@
-import { Entity, PrimaryGeneratedColumn,Column, CreateDateColumn, UpdateDateColumn, OneToOne, JoinColumn} from "typeorm";
+import { Entity, PrimaryGeneratedColumn,Column, CreateDateColumn, UpdateDateColumn,OneToMany, OneToOne, JoinColumn} from "typeorm";
 import { Addresseses } from "./Addresses.entities";
+
 
 @Entity()
 export class Users {
