@@ -1,5 +1,6 @@
-import { Column, Entity, PrimaryColumn } from "typeorm";
+import { Column, Entity, ManyToOne, PrimaryColumn } from "typeorm";
 import { v4 as uuid } from "uuid";
+import { Institutions } from "./institution.entity";
 
 @Entity()
 export class Requests {
@@ -11,6 +12,9 @@ export class Requests {
 
 	@Column({ nullable: true })
 	description: string;
+
+	@ManyToOne((type) => Institutions, (institution) => institution.requests, {onDelete: "SET NULL"})
+	institution: Institutions
 
 	constructor() {
 		if (!this.id) {
