@@ -1,5 +1,6 @@
-import { Column, Entity, OneToMany, PrimaryColumn } from "typeorm";
+import { Column, Entity, OneToMany, ManyToOne, PrimaryColumn } from "typeorm";
 import { v4 as uuid } from "uuid";
+import { Institutions } from "./institution.entity";
 import { Types } from "./types.entity";
 
 @Entity()
@@ -13,6 +14,9 @@ export class Requests {
 	@Column({ nullable: true })
 	description: string;
 
+	@ManyToOne((type) => Institutions, (institution) => institution.requests, {onDelete: "SET NULL"})
+	institution: Institutions
+  
 	@OneToMany(() => Types, (types) => types.request)
 	types: Types[];
 
