@@ -1,4 +1,6 @@
-import { Column, Entity, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn } from "typeorm";
+import { Column, Entity, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn ,OneToOne,JoinColumn} from "typeorm";
+import { Addresseses } from "./Addresses.entities";
+
 
 @Entity("institutions")
 export class Institutions {
@@ -25,4 +27,9 @@ export class Institutions {
 
   @Column({ default: true })
   isActive: boolean;
+
+  @OneToOne(() => Addresseses, {
+    eager: true //,onDelete:"CASCADE"
+})@JoinColumn()
+address: Addresseses
 }
