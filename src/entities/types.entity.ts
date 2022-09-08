@@ -16,7 +16,7 @@ export class Types {
 	@Column({ default: true })
 	isActive: boolean;
 
-	@ManyToOne(() => Requests, { nullable: false })
+	@ManyToOne(() => Requests, (request) => request.types, { nullable: false })
 	request: Requests;
 
 	constructor() {
