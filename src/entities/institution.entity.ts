@@ -1,6 +1,7 @@
 import { Column, Entity, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn ,OneToMany, OneToOne,JoinColumn} from "typeorm";
 import { Addresseses } from "./Addresses.entities";
 import { Requests } from "./requests.entity";
+import { Itens } from "./objects.entity";
 
 @Entity("institutions")
 export class Institutions {
@@ -35,4 +36,7 @@ export class Institutions {
     eager: true //,onDelete:"CASCADE"
 })@JoinColumn()
 address: Addresseses
+
+  @OneToMany(()=> Itens, Itens => Itens.institution)
+  objects: Itens[]
 }
