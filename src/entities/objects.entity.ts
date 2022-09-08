@@ -1,5 +1,9 @@
 import { Entity, PrimaryGeneratedColumn, Column, OneToOne, ManyToOne, JoinColumn, OneToMany } from "typeorm";
 import { Status } from "./status.entity";
+import { Types } from "./types.entity";
+import { Users } from "./users.entity";
+import { Institutions } from "./institution.entity";
+
 
 @Entity('objects')
 class Itens{
@@ -14,16 +18,16 @@ class Itens{
 
     @OneToOne(() => Status, {eager: true}) @JoinColumn()
     status: Status
-    /*
-    @ManyToOne(() => )
-    user: 
+    
+    @ManyToOne(() => Users, (Users) => Users.id)
+    user: Users
 
-    @ManyToOne(() => )
-    type:
+    @ManyToOne(() => Types, (Types) => Types.id)
+    type: Types
 
-    @ManyToOne(() => )
-    institution:
-    */
+    @ManyToOne(() => Institutions, (Institutions) => Institutions.id)
+    institution: Institutions
+    
 }
 
 export { Itens }
