@@ -1,4 +1,5 @@
-import { Column, Entity, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn } from "typeorm";
+import { Column, Entity, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn, OneToMany } from "typeorm";
+import { Requests } from "./requests.entity";
 
 @Entity("institutions")
 export class Institutions {
@@ -22,6 +23,9 @@ export class Institutions {
 
   @UpdateDateColumn({name: "updatedAt"})
   updatedAt: Date;
+
+  @OneToMany((type) => Requests, (requests) => requests.institution, {onDelete: "SET NULL"})
+  requests: Requests[];
 
   @Column({ default: true })
   isActive: boolean;
