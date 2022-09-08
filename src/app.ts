@@ -1,5 +1,6 @@
 import express from "express";
 import { appRoutes } from "./routes";
+import "express-async-errors";
 
 import { Request, Response } from "express";
 
@@ -17,7 +18,7 @@ app.use(express.json());
 // 	throw new AppError(400, "Error working");
 // });
 
-app.use(appRoutes);
+appRoutes(app);
 app.use(errorHandlingMiddleware);
 
 export { app };
