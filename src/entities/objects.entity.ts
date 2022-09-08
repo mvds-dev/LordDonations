@@ -16,16 +16,16 @@ class Itens{
     @Column()
     description: number
 
-    @OneToOne(() => Status, {eager: true}) @JoinColumn()
+    @ManyToOne(() => Status, (Status) => Status.objects)
     status: Status
     
-    @ManyToOne(() => Users, (Users) => Users.id)
+    @ManyToOne(() => Users, (Users) => Users.objects)
     user: Users
 
-    @ManyToOne(() => Types, (Types) => Types.id)
+    @ManyToOne(() => Types, (Types) => Types.objects)
     type: Types
 
-    @ManyToOne(() => Institutions, (Institutions) => Institutions.id)
+    @ManyToOne(() => Institutions, (Institutions) => Institutions.objects)
     institution: Institutions
     
 }
