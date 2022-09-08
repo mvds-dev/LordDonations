@@ -1,28 +1,39 @@
-import { Column, Entity, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn } from "typeorm";
+import {
+	Column,
+	Entity,
+	PrimaryGeneratedColumn,
+	CreateDateColumn,
+	UpdateDateColumn,
+	OneToMany,
+} from "typeorm";
+import { Requests } from "./requests.entity";
 
 @Entity("institutions")
 export class Institutions {
-  @PrimaryGeneratedColumn("uuid")
-  id: string;
+	@PrimaryGeneratedColumn("uuid")
+	id: string;
 
-  @Column()
-  name: string;
+	@Column()
+	name: string;
 
-  @Column({ unique: true })
-  email: string;
-  
-  @Column()
-  cnpj: string;
+	@Column({ unique: true })
+	email: string;
 
-  @Column()
-  password: string;
+	@Column()
+	cnpj: string;
 
-  @CreateDateColumn({name: "createAt"})
-  createdAt: Date;
+	@Column()
+	password: string;
 
-  @UpdateDateColumn({name: "updatedAt"})
-  updatedAt: Date;
+	@CreateDateColumn({ name: "createAt" })
+	createdAt: Date;
 
-  @Column({ default: true })
-  isActive: boolean;
+	@UpdateDateColumn({ name: "updatedAt" })
+	updatedAt: Date;
+
+	@Column({ default: true })
+	isActive: boolean;
+
+	@OneToMany(() => Requests, (requests) => requests.institution)
+	requests: Requests[];
 }
