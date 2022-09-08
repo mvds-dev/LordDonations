@@ -1,5 +1,6 @@
 import { Entity, PrimaryGeneratedColumn,Column, CreateDateColumn, UpdateDateColumn,OneToMany, OneToOne, JoinColumn} from "typeorm";
 import { Addresseses } from "./Addresses.entities";
+import { Itens } from "./objects.entity";
 
 
 @Entity()
@@ -32,4 +33,7 @@ export class Users {
         eager: true //,onDelete:"CASCADE"
     })@JoinColumn()
     address: Addresseses
+
+    @OneToMany(()=> Itens, Itens => Itens.user)
+    objects: Itens[]
 }
