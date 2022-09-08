@@ -1,5 +1,6 @@
-import { Column, Entity, PrimaryColumn } from "typeorm";
+import { Column, Entity, OneToMany, PrimaryColumn } from "typeorm";
 import { v4 as uuid } from "uuid";
+import { Types } from "./types.entity";
 
 @Entity()
 export class Requests {
@@ -11,6 +12,9 @@ export class Requests {
 
 	@Column({ nullable: true })
 	description: string;
+
+	@OneToMany(() => Types, (types) => types.request)
+	types: Types[];
 
 	constructor() {
 		if (!this.id) {

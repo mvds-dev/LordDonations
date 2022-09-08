@@ -1,5 +1,6 @@
-import { Column, Entity, PrimaryColumn } from "typeorm";
+import { Column, Entity, ManyToOne, PrimaryColumn } from "typeorm";
 import { v4 as uuid } from "uuid";
+import { Requests } from "./requests.entity";
 
 @Entity()
 export class Types {
@@ -14,6 +15,9 @@ export class Types {
 
 	@Column({ default: true })
 	isActive: boolean;
+
+	@ManyToOne(() => Requests, { nullable: false })
+	request: Requests;
 
 	constructor() {
 		if (!this.id) {
