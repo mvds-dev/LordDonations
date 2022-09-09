@@ -18,3 +18,7 @@ export interface IUser {
     createdAt: Date
     updatedAt: Date
 }
+
+export interface IUserId {
+    id: string
+}
