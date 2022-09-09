@@ -1,5 +1,5 @@
 import { Request, Response } from 'express'
-import { AppError, handleError } from '../erros/appError'
+import { AppError} from '../erros/appError'
 import "express-async-errors"
 import adressesCreateService from '../services/adresses/createAdresses.service'
 
@@ -17,7 +17,7 @@ const adressesControler = async (req: Request, res: Response) => {
     } catch (err) {
 
         if (err instanceof AppError) {
-            handleError(err, res)
+            throw new AppError(400, "erro")
         }
     }
 
