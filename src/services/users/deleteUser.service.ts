@@ -7,17 +7,17 @@ const deleteUserService = async ({id}: IUserId): Promise<void> =>{
     
     const userRepository = AppDataSource.getRepository(Users)
 
-    const userInactive = await userRepository.findOne({where: {id: id}})
+    const user = await userRepository.findOne({where: {id: id}})
 
-    if(!userInactive){
-        throw new AppError(400,"User does not exist")
+    if(!user){
+        throw new AppError(404,"User does not exist")
     }
 
-    if(userInactive?.isActive == false){
+    if(user?.isActive == false){
         throw new AppError(400,"Inactive User")
     }
 
-    const user = await userRepository.update({id: id},{
+    await userRepository.update({id: id},{
             isActive: false
         }
     )
