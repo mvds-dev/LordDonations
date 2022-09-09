@@ -12,7 +12,7 @@ const institutionsRoutes = (app: Express) => {
 	app.get("/institutions", institutionsListController);
 	app.delete("/institutions/:id", institutionDeleteController);
 	app.post("/institutions/login", institutionLoginController);
-	app.patch("/institutions/update/:id", institutionUpdateController);
+	app.patch("/institutions/:id", institutionUpdateController);
 };
 
 export { institutionsRoutes };
