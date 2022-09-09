@@ -3,6 +3,7 @@ import institutionDeleteService from "../services/institutions/institutionDelete
 import institutionLoginService from "../services/institutions/institutionLogin.service";
 import institutionsCreateService from "../services/institutions/institutionsCreate.service";
 import institutionsListService from "../services/institutions/institutionsList.service";
+import institutionUpdateService from "../services/institutions/institutionUpdate.service";
 
 export const institutionCreateController = async (
 	req: Request,
@@ -42,4 +43,18 @@ export const institutionLoginController = async (
 	const institutionLogin = await institutionLoginService(data);
 
 	return res.status(202).send({ token: institutionLogin });
+};
+
+export const institutionUpdateController = async (
+	req: Request,
+	res: Response,
+) => {
+	const data = req.body;
+	data.id = req.params.id;
+
+	const updatedInstitution = await institutionUpdateService(data);
+
+	return res
+		.status(202)
+		.send({ message: "Institution updated!", updatedInstitution });
 };
