@@ -16,7 +16,6 @@ const deleteAdressesService = async (id:string) => {
     const updateUser = await AddressesesRepository.delete(idExist)
 
 
-    return {mensagen:"usuario foi deletado"}
 }
 
 export default deleteAdressesService
