@@ -4,7 +4,7 @@ import adressesControler from "../controllers/adresses.controllers";
 
 const adressesRoutes = (app:Express) => {
     
-    app.post('/adresses',adressesControler)
+    app.post('/addresses',adressesControler)
     
 }
 
