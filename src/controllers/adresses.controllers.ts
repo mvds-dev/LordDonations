@@ -4,9 +4,10 @@ import "express-async-errors"
 
 import adressesCreateService from '../services/adresses/createAdresses.service'
 import listAdressesService from '../services/adresses/listAdresses.service'
+import deleteAdressesService from '../services/adresses/deleteAdresses.service'
 
 
-export const adressesControler = async (req: Request, res: Response) => {
+export const createAdressesControler = async (req: Request, res: Response) => {
 
     const {city, state, number, cep, district} = req.body
 
@@ -16,10 +17,17 @@ export const adressesControler = async (req: Request, res: Response) => {
 
 }
 
-
 export const listAdressesControler = async (req: Request, res: Response) => {
 
     const listAdresses =  await listAdressesService()
     
     return res.status(201).send(listAdresses)
+}
+
+export const deleteAdressesControler = async (req: Request, res: Response) => {
+    // console.log(typeof req.params.id)
+
+    const deleteAdresses =  await deleteAdressesService(req.params.id)
+    
+    return res.status(200).send(deleteAdresses)
 }
