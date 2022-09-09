@@ -1,12 +1,11 @@
-import { Router } from "express";
+import { Express } from 'express'
 import adressesControler from "../controllers/adresses.controllers";
 
-const routes = Router()
 
-export const adressesRoutes = () => {
+const adressesRoutes = (app:Express) => {
     
-    routes.post('/adresses',adressesControler)
+    app.post('/adresses',adressesControler)
     
-    return routes
 }
 
+export { adressesRoutes }
