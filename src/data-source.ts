@@ -6,8 +6,16 @@ const AppDataSource = new DataSource({
   host: "localhost",
   port: 5432,
   url: process.env.DATABASE_URL,
-  entities: ["src/entities/**.ts"],
-  migrations: ["src/migrations/**.ts"],
+  ssl:
+    process.env.NODE === "production" ? { rejectUnauthorized: false } : false,
+  entities:
+    process.env.NODE === "production"
+      ? ["dist/src/entities/**/*.{ts,js}"]
+      : ["src/entities/**/*.{ts,js}"],
+  migrations:
+    process.env.NODE === "production"
+      ? ["dist/src/entities/**/*.{ts,js}"]
+      : ["src/entities/**/*.{ts,js}"],
   synchronize: false,
   logging: true,
 });
