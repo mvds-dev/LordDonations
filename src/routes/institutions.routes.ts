@@ -1,12 +1,8 @@
-import { Router } from "express";
 import { institutionCreateController } from "../controllers/institutions.controllers";
+import { Express } from "express";
 
-const routes = Router();
-
-const institutionsRoutes = () => {
-	routes.post("", institutionCreateController);
-
-	return routes;
+const institutionsRoutes = (app: Express) => {
+	app.post("/institutions", institutionCreateController);
 };
 
-export default institutionsRoutes;
+export { institutionsRoutes };
