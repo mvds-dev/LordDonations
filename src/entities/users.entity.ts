@@ -15,6 +15,9 @@ export class Users {
     email: string
 
     @Column()
+    password: string
+
+    @Column()
     age: number
 
     @Column({unique: true})
