@@ -23,7 +23,7 @@ export class Users {
     @Column({unique: true})
     cpf: string
 
-    @Column()
+    @Column({default: true})
     isActive: boolean
 
     @CreateDateColumn({name: "createdAt"})
