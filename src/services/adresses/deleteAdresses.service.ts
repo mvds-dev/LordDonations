@@ -10,7 +10,7 @@ const deleteAdressesService = async (id:string) => {
     const idExist = DadosAddresseses.find(user => user.id === id)
 
     if(!idExist){
-        throw new AppError(404, "nao encontrado")
+        throw new AppError(404, "Address not found")
     }
 
     const updateUser = await AddressesesRepository.delete(idExist)
