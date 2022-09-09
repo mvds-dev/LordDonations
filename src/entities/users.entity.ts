@@ -15,12 +15,15 @@ export class Users {
     email: string
 
     @Column()
+    password: string
+
+    @Column()
     age: number
 
     @Column({unique: true})
     cpf: string
 
-    @Column()
+    @Column({default: true})
     isActive: boolean
 
     @CreateDateColumn({name: "createdAt"})
