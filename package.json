@@ -6,8 +6,8 @@
 	"scripts": {
 		"dev": "ts-node-dev src/server.ts",
 		"typeorm": "typeorm-ts-node-commonjs",
-		"build":"tsc",
-		"start":"node/dist/src/server.js"
+		"build": "tsc",
+		"start": "node/dist/src/server.js"
 	},
 	"dependencies": {
 		"@types/uuid": "^8.3.4",
