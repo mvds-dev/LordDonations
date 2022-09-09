@@ -14,3 +14,8 @@ export interface IInstitution {
 	updatedAt: Date;
 	isActive: boolean;
 }
+
+export interface IInstitutionLogin {
+	email: string;
+	password: string;
+}
