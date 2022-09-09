@@ -10,19 +10,23 @@ import { v4 as uuid } from "uuid"
 
 const adressesCreateService = async ({city, state, number, cep, district}: IadressesCreate) => {
 
-    const AddressesesRepository = AppDataSource.getRepository(Addresseses) 
+    const AddressesesRepository = AppDataSource.getRepository(Addresseses) ;
 
-    const DadosAddresseses = await AddressesesRepository.find()
+    if(!city || !state || !number || !cep || !district) {
+        throw new AppError(400, "Wrong format");
+    }
 
-    const cepAlreadyExists = DadosAddresseses.find(user => user.cep === cep)
+    const DadosAddresseses = await AddressesesRepository.find();
+
+    const cepAlreadyExists = DadosAddresseses.find(user => user.cep === cep);
 
     // const numberAlreadyExists = DadosAddresseses.find(user => user.number === number)
 
     if (cepAlreadyExists) {
-        throw new AppError(400, "endereço ja existe already exists")
+        throw new AppError(409, "address already exists");
     }
 
-    const myID = uuid()
+    const myID = uuid();
 
     const newAddresseses = {
     "id":myID,
@@ -33,10 +37,10 @@ const adressesCreateService = async ({city, state, number, cep, district}: Iadre
 	"district":district
 }
 
-    AddressesesRepository.create(newAddresseses)
-    await AddressesesRepository.save(newAddresseses)
+    AddressesesRepository.create(newAddresseses);
+    await AddressesesRepository.save(newAddresseses);
 
-    return newAddresseses
+    return newAddresseses;
 }
 
-export default adressesCreateService
+export default adressesCreateService;
