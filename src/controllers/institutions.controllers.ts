@@ -30,5 +30,5 @@ export const institutionDeleteController = async (
 	const { id } = req.params;
 	const institutionDeleted = await institutionDeleteService(id);
 
-	return res.status(202).json({ message: "Institution deleted with sucess!" });
+	return res.status(202).json({ message: "Institution deleted with success!" });
 };
