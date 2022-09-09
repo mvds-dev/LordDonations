@@ -4,6 +4,7 @@ import { AppDataSource } from "../../data-source";
 import { Institutions } from "../../entities/institution.entity";
 import { AppError } from "../../erros/appError";
 import { IInstitutionLogin } from "../../interfaces/institutions";
+import "dotenv/config";
 
 const institutionLoginService = async ({
 	email,
