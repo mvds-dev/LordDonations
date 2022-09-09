@@ -29,5 +29,5 @@ export const deleteAdressesControler = async (req: Request, res: Response) => {
 
     const deleteAdresses =  await deleteAdressesService(req.params.id)
     
-    return res.status(200).send(deleteAdresses)
+    return res.status(204).send()
 }
