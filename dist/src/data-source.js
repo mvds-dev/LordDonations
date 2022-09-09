@@ -11,8 +11,8 @@ const AppDataSource = new typeorm_1.DataSource({
         ? ["dist/src/entities/**/*.{ts,js}"]
         : ["src/entities/**/*.{ts,js}"],
     migrations: process.env.NODE === "production"
-        ? ["dist/src/entities/**/*.{ts,js}"]
-        : ["src/entities/**/*.{ts,js}"],
+        ? ["dist/src/migrations/**/*.{ts,js}"]
+        : ["src/migrations/**/*.{ts,js}"],
     synchronize: false,
     logging: true,
 });
