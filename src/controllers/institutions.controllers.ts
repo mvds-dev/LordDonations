@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import institutionDeleteService from "../services/institutions/institutionDelete.service";
+import institutionLoginService from "../services/institutions/institutionLogin.service";
 import institutionsCreateService from "../services/institutions/institutionsCreate.service";
 import institutionsListService from "../services/institutions/institutionsList.service";
 
@@ -30,5 +31,15 @@ export const institutionDeleteController = async (
 	const { id } = req.params;
 	const institutionDeleted = await institutionDeleteService(id);
 
-	return res.status(202).json({ message: "Institution deleted with sucess!" });
+	return res.status(202).json({ message: "Institution deleted with success!" });
+};
+
+export const institutionLoginController = async (
+	req: Request,
+	res: Response,
+) => {
+	const data = req.body;
+	const institutionLogin = await institutionLoginService(data);
+
+	return res.status(202).send({ token: institutionLogin });
 };

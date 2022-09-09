@@ -7,19 +7,23 @@ import { hash } from 'bcrypt'
 
 const createUserService = async ({name, age, cpf, email, password}: IUserRequest): Promise<Users> => {
 
-    const userRepository = AppDataSource.getRepository(Users)
+    const userRepository = AppDataSource.getRepository(Users);
+
+    if(!name || !age || !cpf || !email || !password) {
+        throw new AppError(400, "Request in wrong format");
+    }
 
     if(!password){
-        throw new AppError(401, "Password is a required field")
+        throw new AppError(401, "Password is a required field");
     }
-
-    const userAlreadyExists = await userRepository.findOne({where: {email: email}})
+//this array syntaxt for find is the equivalent to the "or" operator
+    const userAlreadyExists = await userRepository.findOne({where: [{email: email}, {cpf: cpf}]});
 
     if(userAlreadyExists){
-        throw new AppError(401,"Email already being used")
+        throw new AppError(401,"User already exists");
     }
 
-    const hashedPassword = await hash(password, 10)
+    const hashedPassword = await hash(password, 10);
 
     const user = userRepository.create({
         name,
@@ -29,9 +33,9 @@ const createUserService = async ({name, age, cpf, email, password}: IUserRequest
         password: hashedPassword
     })
 
-    await userRepository.save(user)
+    await userRepository.save(user);
 
-    return user
+    return user;
 
 }
 

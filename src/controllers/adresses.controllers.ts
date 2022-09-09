@@ -22,5 +22,4 @@ export const listAdressesControler = async (req: Request, res: Response) => {
     const listAdresses =  await listAdressesService()
     
     return res.status(201).send(listAdresses)
-
 }
