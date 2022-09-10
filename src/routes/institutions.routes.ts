@@ -5,6 +5,7 @@ import {
 	institutionsListController,
 	institutionUpdateController,
 } from "../controllers/institutions.controllers";
+import { createRequestsController } from "../controllers/requests.controllers";
 import { Express } from "express";
 
 const institutionsRoutes = (app: Express) => {
@@ -13,6 +14,9 @@ const institutionsRoutes = (app: Express) => {
 	app.delete("/institutions/:id", institutionDeleteController);
 	app.post("/institutions/login", institutionLoginController);
 	app.patch("/institutions/:id", institutionUpdateController);
+
+	//requests
+	app.post("/institutions/:id/requests", createRequestsController);
 };
 
 export { institutionsRoutes };
