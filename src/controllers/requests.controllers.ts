@@ -2,6 +2,7 @@ import { listRequestsServices } from "../services/requests/listRequests.service"
 import { Request, Response } from "express";
 import { createRequestsService } from "../services/requests/createRequests.service";
 import { IRequestsCreate } from "../interfaces/requests";
+import { deleteRequestsService } from "../services/requests/deleteRequests.service";
 
 const listRequestsController = async (req: Request, res: Response) => {
     const output = await listRequestsServices();
@@ -15,4 +16,10 @@ const createRequestsController = async (req: Request, res: Response) => {
     return res.status(201).json(output);
 }
 
-export { listRequestsController, createRequestsController };
+const deleteRequestsController = async (req: Request, res: Response) => {
+    const {institutionId, requestId} = req.params;
+    await deleteRequestsService(requestId, institutionId);
+    return res.status(204).send();
+}
+
+export { listRequestsController, createRequestsController, deleteRequestsController };
