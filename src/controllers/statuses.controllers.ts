@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import { createStatusesService } from "../services/statuses/createStatuses.service";
+import { listStatusesService } from "../services/statuses/listStatuses.service";
 
 const createStatusesController = async (req: Request, res: Response) => {
     const { name } = req.body;
@@ -7,4 +8,9 @@ const createStatusesController = async (req: Request, res: Response) => {
     return res.status(201).json(output);
 };
 
-export { createStatusesController };
+const listStatusesController = async (req: Request, res: Response) => {
+    const output = await listStatusesService();
+    return res.status(200).json(output);
+}
+
+export { createStatusesController, listStatusesController };
