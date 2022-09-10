@@ -5,7 +5,7 @@ import {
 	institutionsListController,
 	institutionUpdateController,
 } from "../controllers/institutions.controllers";
-import { createRequestsController, deleteRequestsController } from "../controllers/requests.controllers";
+import { createRequestsController, deleteRequestsController, updateRequestsController } from "../controllers/requests.controllers";
 import { Express } from "express";
 
 const institutionsRoutes = (app: Express) => {
@@ -19,6 +19,7 @@ const institutionsRoutes = (app: Express) => {
 	//requests
 	app.post("/institutions/:id/requests", createRequestsController);
 	app.delete("/institutions/:institutionId/requests/:requestId", deleteRequestsController);
+	app.patch("/institutions/:institutionId/requests/:requestId", updateRequestsController);
 };
 
 export { institutionsRoutes };
