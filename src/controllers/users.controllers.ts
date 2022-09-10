@@ -2,7 +2,7 @@ import { Request, Response } from 'express'
 import { IUserRequest } from '../interfaces/users'
 import createUserService from '../services/users/createUsers.service'
 import deleteUserService from '../services/users/deleteUser.service'
-
+import listUsersService from '../services/users/getUsers.service'
 
 const createUserController = async (req: Request, res: Response) => {
     
@@ -20,6 +20,12 @@ const deleteUserController = async (req: Request, res: Response) => {
 
 }
 
+const listUsersController = async (req: Request, res: Response) => {
+    
+    const user = await listUsersService()
+    return res.json(user)
+    
+}
 
 
-export { createUserController, deleteUserController }
+export { createUserController, deleteUserController, listUsersController }
