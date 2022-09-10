@@ -2,6 +2,7 @@ import { Request, Response } from "express";
 import { createStatusesService } from "../services/statuses/createStatuses.service";
 import { listStatusesService } from "../services/statuses/listStatuses.service";
 import { deleteStatusesService } from "../services/statuses/deleteStatuses.service";
+import { updateStatusesService } from "../services/statuses/updateStatuses.service";
 
 const createStatusesController = async (req: Request, res: Response) => {
     const { name } = req.body;
@@ -20,4 +21,11 @@ const deleteStatusesController = async (req: Request, res: Response) => {
     return res.status(204).send();
 }
 
-export { createStatusesController, listStatusesController, deleteStatusesController };
+const updateStatusesController = async (req: Request, res: Response) => {
+    const { id } = req.params;
+    const { name } = req.body;
+    const output = await updateStatusesService({id, name});
+    return res.status(200).json(output);
+}
+
+export { createStatusesController, listStatusesController, deleteStatusesController, updateStatusesController };
