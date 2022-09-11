@@ -33,7 +33,7 @@ const institutionLoginService = async ({
 		throw new AppError(403, "User is deactivated");
 	}
 
-	const token = jwt.sign({ email: email }, String(process.env.SECRET_KEY), {
+	const token = jwt.sign({ email: email, userType: "institution" }, String(process.env.SECRET_KEY), {
 		expiresIn: "24h",
 	});
 

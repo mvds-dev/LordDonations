@@ -23,7 +23,7 @@ const loginUserService = async (email:string , password:string)=>{
         throw new AppError(404, "Wrong email/password")
     } 
 
-    const token = jwt.sign({email: email}, String(process.env.SECRET_KEY),{expiresIn: '1d'})
+    const token = jwt.sign({email: email, userType: "user"}, String(process.env.SECRET_KEY),{expiresIn: '1d'})
 
 
     return {"token":token};
