@@ -6,6 +6,8 @@ import listUsersService from '../services/users/getUsers.service'
 import loginUserService from '../services/users/loginUsers.service'
 import { updateUsersService } from '../services/users/updateUsers.service'
 
+import jwt from 'jsonwebtoken'
+
 const createUserController = async (req: Request, res: Response) => {
     
     const {name, age, cpf, email, password }: IUserRequest = req.body
@@ -15,9 +17,10 @@ const createUserController = async (req: Request, res: Response) => {
 }
 
 const deleteUserController = async (req: Request, res: Response) => {
-
-    const {id} = req.params
-    const user = await deleteUserService({id})
+    const { authorization } = req.headers;
+    const token = authorization!.split(" ")[1];
+    const { id } = jwt.decode(token) as {id: string};
+    await deleteUserService({id})
     return res.status(204).json('')
 
 }
@@ -30,7 +33,9 @@ const listUsersController = async (req: Request, res: Response) => {
 }
 
 const updateUsersController = async (req: Request, res: Response) => {
-    const { id } = req.params;
+    const { authorization } = req.headers;
+    const token = authorization!.split(" ")[1];
+    const { id } = jwt.decode(token) as {id: string};
     const {name, age, email, cpf, password} = req.body;
     const output = await updateUsersService({id, name, age, email, cpf, password});
     return res.status(200).json(output);
