@@ -30,7 +30,7 @@ const institutionLoginService = async ({
 	}
 
 	if (!account?.isActive) {
-		throw new AppError(403, "User is deactivated");
+		throw new AppError(403, "institution is deactivated");
 	}
 
 	const token = jwt.sign({ email: email, userType: "institution" }, String(process.env.SECRET_KEY), {
