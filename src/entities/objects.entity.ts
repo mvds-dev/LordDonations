@@ -14,7 +14,7 @@ class Itens{
     name: string
 
     @Column()
-    description: number
+    description: string
 
     @ManyToOne(() => Status, (Status) => Status.objects)
     status: Status
