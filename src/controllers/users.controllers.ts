@@ -3,6 +3,7 @@ import { IUserRequest } from '../interfaces/users'
 import createUserService from '../services/users/createUsers.service'
 import deleteUserService from '../services/users/deleteUser.service'
 import listUsersService from '../services/users/getUsers.service'
+import loginUserService from '../services/users/loginUsers.service'
 import { updateUsersService } from '../services/users/updateUsers.service'
 
 const createUserController = async (req: Request, res: Response) => {
@@ -35,5 +36,13 @@ const updateUsersController = async (req: Request, res: Response) => {
     return res.status(200).json(output);
 }
 
+const loginUserController = async (req: Request, res: Response) => {
+    
+    const {email, password } = req.body
+    const token = await loginUserService(email, password)
+    return res.status(200).json(token)
+    
+}
 
-export { createUserController, deleteUserController, listUsersController, updateUsersController }
+
+export { createUserController, deleteUserController, listUsersController, updateUsersController, loginUserController }
