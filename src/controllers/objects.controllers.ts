@@ -4,13 +4,14 @@ import "express-async-errors"
 
 import listObjectsService from '../services/objects/listObjects.service'
 import { createObjectsService } from '../services/objects/createObjects.service'
+import { deleteObjectsService } from '../services/objects/deleteObjects.service'
 
 
 export const listObjectsControler = async (req: Request, res: Response) => {
 
     const listAdresses =  await listObjectsService()
     
-    return res.status(201).send(listAdresses)
+    return res.status(200).send(listAdresses)
 }
 
 export const createObjectsController = async (req: Request, res: Response) => {
@@ -18,5 +19,11 @@ export const createObjectsController = async (req: Request, res: Response) => {
     const { typeId, name, description } = req.body;
     const output = await createObjectsService({userId, typeId, name, description});
     return res.status(201).json(output);
+}
+
+export const deleteObjectsController = async (req: Request, res: Response) => {
+    const {userId, objectId} = req.params;
+    await deleteObjectsService({userId, objectId});
+    return res.status(204).send();
 }
 
