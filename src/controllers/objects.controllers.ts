@@ -7,6 +7,8 @@ import { createObjectsService } from '../services/objects/createObjects.service'
 import { deleteObjectsService } from '../services/objects/deleteObjects.service'
 import { updateObjectsService } from '../services/objects/updateObjects.service'
 
+import jwt from "jsonwebtoken";
+
 
 export const listObjectsControler = async (req: Request, res: Response) => {
 
@@ -16,20 +18,36 @@ export const listObjectsControler = async (req: Request, res: Response) => {
 }
 
 export const createObjectsController = async (req: Request, res: Response) => {
-    const { userId } = req.params;
+    const { authorization } = req.headers;
+    const token = authorization!.split(" ")[1];
+    const { id } = jwt.decode(token) as {id: string};
+    const userId = id;
+
     const { typeId, name, description } = req.body;
     const output = await createObjectsService({userId, typeId, name, description});
     return res.status(201).json(output);
 }
 
 export const deleteObjectsController = async (req: Request, res: Response) => {
-    const {userId, objectId} = req.params;
+    const {objectId} = req.params;
+
+    const { authorization } = req.headers;
+    const token = authorization!.split(" ")[1];
+    const { id } = jwt.decode(token) as {id: string};
+    const userId = id;
+    
     await deleteObjectsService({userId, objectId});
     return res.status(204).send();
 }
 
 export const updateObjectsController = async (req: Request, res: Response) => {
-    const {userId, objectId} = req.params;
+    const {objectId} = req.params;
+
+    const { authorization } = req.headers;
+    const token = authorization!.split(" ")[1];
+    const { id } = jwt.decode(token) as {id: string};
+    const userId = id;
+
     const { typeId,  name, description} = req.body;
     const output = await updateObjectsService({userId, objectId, typeId,  name, description});
     return res.status(200).json(output);
