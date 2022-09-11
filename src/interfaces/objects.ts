@@ -4,3 +4,11 @@ export interface ICreateObjects {
     name: string,
     description: string
 }
+
+export interface IUpdateObjects {
+    userId: string,
+    objectId: string,
+    typeId?: string,
+    name?: string,
+    description?: string
+}
