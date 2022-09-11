@@ -3,6 +3,7 @@ import { Users } from '../../entities/users.entity'
 import { AppError } from '../../erros/appError'
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
+import "dotenv/config";
 
 const loginUserService = async (email:string , password:string)=>{
 
@@ -24,7 +25,7 @@ const loginUserService = async (email:string , password:string)=>{
         throw new AppError(404, "Wrong email/password")
     } 
 
-    const token = jwt.sign({email: email}, String("secretKen"),{expiresIn: '1d'})
+    const token = jwt.sign({email: email}, String(process.env.SECRET_KEY),{expiresIn: '1d'})
 
 
     return {"token":token};
