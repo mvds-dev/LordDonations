@@ -13,15 +13,13 @@ const loginUserService = async (email:string , password:string)=>{
 
     const userRepository = AppDataSource.getRepository(Users) 
 
-    const users = await userRepository.find()
+    const user = await userRepository.findOne({where: {email: email}})
 
-    const validarEmail = users.find((element) => element.email === email);
-
-    if (!validarEmail) {
+    if (!user) {
         throw new AppError(404, "Wrong email/password")
     }
 
-    if(!bcrypt.compareSync(password, validarEmail.password)){
+    if(!bcrypt.compareSync(password, user.password)){
         throw new AppError(404, "Wrong email/password")
     } 
 
