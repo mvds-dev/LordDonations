@@ -25,7 +25,7 @@ const loginUserService = async (email:string , password:string)=>{
 
     if(!user.isActive) throw new AppError(400, "user is not active");
 
-    const token = jwt.sign({email: email, userType: "user"}, String(process.env.SECRET_KEY),{expiresIn: '1d'})
+    const token = jwt.sign({id: user.id, userType: "user"}, String(process.env.SECRET_KEY),{expiresIn: '1d'})
 
 
     return {"token":token};
