@@ -22,3 +22,12 @@ export interface IUser {
 export interface IUserId {
     id: string
 }
+
+export interface IUserUpdate {
+    id: string
+    name: string
+    age: number
+    cpf: string
+    email: string
+    password: string
+}
