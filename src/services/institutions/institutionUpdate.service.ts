@@ -1,9 +1,11 @@
+import { hash } from "bcrypt";
 import { AppDataSource } from "../../data-source";
 import { Institutions } from "../../entities/institution.entity";
 import { AppError } from "../../erros/appError";
+import { IInstitutionUpdate } from "../../interfaces/institutions";
 
 //Isso aqui precisa ser arrumado
-const institutionUpdateService = async ({ id, name, email, cnpj }: any) => {
+const institutionUpdateService = async ({ id, name, email, cnpj, password }: IInstitutionUpdate) => {
 	const institutionsRepository = AppDataSource.getRepository(Institutions);
 	const institutions = await institutionsRepository.find();
 
@@ -45,11 +47,17 @@ const institutionUpdateService = async ({ id, name, email, cnpj }: any) => {
 		throw new AppError(409, "Try a different name");
 	}
 
+	let newPassword = password;
+	if(password) {
+		newPassword = await hash(password, 10);
+	}
+
 	return institutionsRepository.save({
 		id: id,
 		name,
 		email,
 		cnpj,
+		password: newPassword
 	});
 };
 
