@@ -45,9 +45,7 @@ export class Institutions {
 	@Column({ default: true })
 	isActive: boolean;
 
-	@OneToOne(() => Addresseses, {
-		eager: true, //,onDelete:"CASCADE"
-	})
+	@OneToOne(() => Addresseses)
 	@JoinColumn()
 	address: Addresseses;
 
