@@ -5,7 +5,7 @@ import { verifyUserAuthMiddleware } from "../middlewares/verifyUserAuth.middlewa
 
 function userRoutes(app: Express) {
     app.post("/users", createUserController);
-    app.delete("/users/:id", verifyUserAuthMiddleware, deleteUserController);
+    app.delete("/users", verifyUserAuthMiddleware, deleteUserController);
     app.get("/users", listUsersController);
     app.patch("/users", verifyUserAuthMiddleware, updateUsersController);
 

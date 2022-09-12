@@ -21,12 +21,18 @@ const createObjectsService = async ({typeId, userId, description, name}:ICreateO
     if(!user) throw new AppError(404, "User not found");
     if(!user.isActive) throw new AppError(400, "User is not active");
 
+    //checks status
+    const statusRepository = AppDataSource.getRepository(Types);
+    const status = await statusRepository.findOne({where: {name: "active"}});
+    if(!status) throw new AppError(404, "status not found");
+
     //creation
     const newObject = new Itens()
     newObject.name = name;
     newObject.description = description;
     newObject.user = user;
     newObject.type = type;
+    newObject.status = status;
 
     const objectsRepository = AppDataSource.getRepository(Itens);
     const createdObject = await objectsRepository.save(newObject);
