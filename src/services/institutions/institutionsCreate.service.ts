@@ -44,17 +44,7 @@ const institutionsCreateService = async ({
 	institutionsRepository.create(institution);
 	await institutionsRepository.save(institution);
 
-	const institutionResponse = {
-		id: institution.id,
-		name: institution.name,
-		email: institution.email,
-		cnpj: institution.cnpj,
-		isActive: institution.isActive,
-		createdAt: institution.createdAt,
-		updatedAt: institution.updatedAt,
-	};
-
-	return institutionResponse;
+	return institution;
 };
 
 export default institutionsCreateService;

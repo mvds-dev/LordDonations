@@ -1,42 +1,53 @@
-import { Entity, PrimaryGeneratedColumn,Column, CreateDateColumn, UpdateDateColumn,OneToMany, OneToOne, JoinColumn} from "typeorm";
+import {
+	Entity,
+	PrimaryGeneratedColumn,
+	Column,
+	CreateDateColumn,
+	UpdateDateColumn,
+	OneToMany,
+	OneToOne,
+	JoinColumn,
+} from "typeorm";
 import { Addresseses } from "./Addresses.entities";
 import { Itens } from "./objects.entity";
-
+import { Exclude } from "class-transformer";
 
 @Entity()
 export class Users {
-    @PrimaryGeneratedColumn("uuid")
-    readonly id: string
+	@PrimaryGeneratedColumn("uuid")
+	readonly id: string;
 
-    @Column()
-    name: string
-    
-    @Column({unique: true})
-    email: string
+	@Column()
+	name: string;
 
-    @Column()
-    password: string
+	@Column({ unique: true })
+	email: string;
 
-    @Column()
-    age: number
+	@Column()
+	@Exclude({ toPlainOnly: true })
+	password: string;
 
-    @Column({unique: true})
-    cpf: string
+	@Column()
+	age: number;
 
-    @Column({default: true})
-    isActive: boolean
+	@Column({ unique: true })
+	cpf: string;
 
-    @CreateDateColumn({name: "createdAt"})
-    createdAt: Date
+	@Column({ default: true })
+	isActive: boolean;
 
-    @UpdateDateColumn({name: "updatedAt"})
-    updatedAt: Date
+	@CreateDateColumn({ name: "createdAt" })
+	createdAt: Date;
 
-    @OneToOne(() => Addresseses, {
-        eager: true //,onDelete:"CASCADE"
-    })@JoinColumn()
-    address: Addresseses
+	@UpdateDateColumn({ name: "updatedAt" })
+	updatedAt: Date;
 
-    @OneToMany(()=> Itens, Itens => Itens.user)
-    objects: Itens[]
+	@OneToOne(() => Addresseses, {
+		eager: true, //,onDelete:"CASCADE"
+	})
+	@JoinColumn()
+	address: Addresseses;
+
+	@OneToMany(() => Itens, (Itens) => Itens.user)
+	objects: Itens[];
 }
