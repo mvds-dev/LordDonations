@@ -1,5 +1,6 @@
 import { AppDataSource } from "../../data-source";
 import { Itens } from "../../entities/objects.entity";
+import { Status } from "../../entities/status.entity";
 import { Types } from "../../entities/types.entity";
 import { Users } from "../../entities/users.entity";
 import { AppError } from "../../erros/appError";
@@ -22,7 +23,7 @@ const createObjectsService = async ({typeId, userId, description, name}:ICreateO
     if(!user.isActive) throw new AppError(400, "User is not active");
 
     //checks status
-    const statusRepository = AppDataSource.getRepository(Types);
+    const statusRepository = AppDataSource.getRepository(Status);
     const status = await statusRepository.findOne({where: {name: "active"}});
     if(!status) throw new AppError(404, "status not found");
 
