@@ -15,7 +15,7 @@ const institutionDonationService = async (ObjectId: any, InstitutionId: any) => 
     const statuses = await statusRepository.find()
 
     const item = items.find((item) => item.id === ObjectId.id);
-    const institution = institutions.find((institution) => institution.id === InstitutionId)
+    const institution:any = institutions.find((institution) => institution.id === InstitutionId)
     const status = statuses.find((status) => status.name === 'sent')
 
     if(item?.status.name != 'active') {
@@ -26,7 +26,7 @@ const institutionDonationService = async (ObjectId: any, InstitutionId: any) => 
         throw new AppError(400, "Item doesn't exist")
     } 
 
-    return itensRepository.save({
+    return await itensRepository.save({
         id: item.id,
         name: item.name,
         description: item.description,
