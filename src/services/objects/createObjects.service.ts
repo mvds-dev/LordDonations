@@ -16,7 +16,7 @@ const createObjectsService = async ({
 	if (!description || !name)
 		throw new AppError(400, "object must have name and description");
 	if (!typeId || !userId)
-		throw new AppError(400, "object must have typeId and userId and statusId");
+		throw new AppError(400, "object must have typeId and userId");
 
 	//checks types
 	const typesRepository = AppDataSource.getRepository(Types);
