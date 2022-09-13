@@ -7,7 +7,7 @@ const listDonationsService = async () => {
 
     const DadosItens = await ItensRepository.find({relations: {status: true}})
 
-    const statusReceived = DadosItens.find(element => element.status.name === "received");
+    const statusReceived = DadosItens.filter(element => element.status.name === "received");
 
     return statusReceived
 }
