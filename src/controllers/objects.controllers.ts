@@ -22,7 +22,7 @@ export const createObjectsController = async (req: Request, res: Response) => {
 	const { id } = jwt.decode(token) as { id: string };
 	const userId = id;
 
-	const { typeId, name, description, statusId } = req.body;
+	const { typeId, name, description } = req.body;
 	const output = await createObjectsService({
 		userId,
 		typeId,
