@@ -42,9 +42,7 @@ export class Users {
 	@UpdateDateColumn({ name: "updatedAt" })
 	updatedAt: Date;
 
-	@OneToOne(() => Addresseses, {
-		eager: true, //,onDelete:"CASCADE"
-	})
+	@OneToOne(() => Addresseses)
 	@JoinColumn()
 	address: Addresseses;
 
