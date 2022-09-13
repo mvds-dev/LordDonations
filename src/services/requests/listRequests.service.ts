@@ -3,7 +3,7 @@ import { Requests } from "../../entities/requests.entity";
 
 const listRequestsServices = async () => {
     const requestsRepository = AppDataSource.getRepository(Requests);
-    const requests = await requestsRepository.find();
+    const requests = await requestsRepository.find({relations: {type: true}});
     return requests;
 }
 
