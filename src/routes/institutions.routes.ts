@@ -1,6 +1,7 @@
 import {
 	institutionCreateController,
 	institutionDeleteController,
+	institutionDonationController,
 	institutionLoginController,
 	institutionsListController,
 	institutionUpdateController,
@@ -28,6 +29,7 @@ const institutionsRoutes = (app: Express) => {
 		verifyInstitutionAuthMiddleware,
 		listDonatedObjectsController,
 	);
+	app.post("/institutions/donations/:id", verifyInstitutionAuthMiddleware, institutionDonationController)
 };
 
 export { institutionsRoutes };

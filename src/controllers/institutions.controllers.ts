@@ -5,6 +5,8 @@ import institutionsCreateService from "../services/institutions/institutionsCrea
 import institutionsListService from "../services/institutions/institutionsList.service";
 import institutionUpdateService from "../services/institutions/institutionUpdate.service";
 import { classToPlain, instanceToPlain } from "class-transformer";
+import institutionDonationService from "../services/institutions/institutionsDonations.service";
+
 
 import jwt from "jsonwebtoken";
 import listDonatedObjectsService from "../services/institutions/donatedObjectsList.service";
@@ -81,3 +83,16 @@ export const listDonatedObjectsController = async (
 	const donatedObjects = await listDonatedObjectsService(id);
 	return res.status(200).send(instanceToPlain(donatedObjects));
 };
+
+export const institutionDonationController = async ( req: Request, res: Response) =>{
+	const objectID = req.params
+	const { authorization } = req.headers;
+	const token = authorization!.split(" ")[1];
+    const { id } = jwt.decode(token) as {id: string};
+	const institutionId = id
+
+	const institutionDonation = await institutionDonationService(objectID, institutionId);
+
+	return res.status(200).send({message: "Item acquired!", institutionDonation })
+}
+
