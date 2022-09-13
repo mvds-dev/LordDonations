@@ -28,7 +28,6 @@ export const createObjectsController = async (req: Request, res: Response) => {
 		typeId,
 		name,
 		description,
-		statusId,
 	});
 	return res.status(201).json(output);
 };

@@ -11,11 +11,10 @@ const createObjectsService = async ({
 	userId,
 	description,
 	name,
-	statusId,
 }: ICreateObjects) => {
 	if (!description || !name)
 		throw new AppError(400, "object must have name and description");
-	if (!typeId || !userId || !statusId)
+	if (!typeId || !userId)
 		throw new AppError(400, "object must have typeId and userId and statusId");
 
 	//checks types
@@ -32,9 +31,7 @@ const createObjectsService = async ({
 
 	//checks status
 	const statusRepository = AppDataSource.getRepository(Status);
-	const status = await statusRepository.findOne({ where: { id: statusId } });
-	console.log(statusId);
-	console.log(status);
+	const status = await statusRepository.findOne({ where: { name: "active" } });
 	if (!status) throw new AppError(404, "status not found");
 
 	//creation

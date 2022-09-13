@@ -3,7 +3,6 @@ export interface ICreateObjects {
 	typeId: string;
 	name: string;
 	description: string;
-	statusId: string;
 }
 
 export interface IUpdateObjects {
