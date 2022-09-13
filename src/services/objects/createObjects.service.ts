@@ -6,6 +6,7 @@ import { Users } from "../../entities/users.entity";
 import { AppError } from "../../erros/appError";
 import { ICreateObjects } from "../../interfaces/objects";
 
+
 const createObjectsService = async ({
 	typeId,
 	userId,
@@ -52,3 +53,4 @@ const createObjectsService = async ({
 };
 
 export { createObjectsService };
+
