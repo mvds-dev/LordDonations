@@ -6,6 +6,7 @@ import listObjectsService from '../services/objects/listObjects.service'
 import { createObjectsService } from '../services/objects/createObjects.service'
 import { deleteObjectsService } from '../services/objects/deleteObjects.service'
 import { updateObjectsService } from '../services/objects/updateObjects.service'
+import listObjectsIsActiveService from '../services/objects/listObjectsIsActive.service'
 
 import jwt from "jsonwebtoken";
 
@@ -15,6 +16,13 @@ export const listObjectsControler = async (req: Request, res: Response) => {
     const listAdresses =  await listObjectsService()
     
     return res.status(200).send(listAdresses)
+}
+
+export const listObjectsIsActiveControler = async (req: Request, res: Response) => {
+
+    const listItens =  await listObjectsIsActiveService()
+    
+    return res.status(200).send(listItens)
 }
 
 export const createObjectsController = async (req: Request, res: Response) => {

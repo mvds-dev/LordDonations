@@ -4,6 +4,7 @@ import institutionLoginService from "../services/institutions/institutionLogin.s
 import institutionsCreateService from "../services/institutions/institutionsCreate.service";
 import institutionsListService from "../services/institutions/institutionsList.service";
 import institutionUpdateService from "../services/institutions/institutionUpdate.service";
+import { instanceToPlain } from "class-transformer";
 
 import jwt from "jsonwebtoken";
 
@@ -15,7 +16,7 @@ export const institutionCreateController = async (
 
 	const newInstitution = await institutionsCreateService(data);
 
-	return res.status(201).send(newInstitution);
+	return res.status(201).send(instanceToPlain(newInstitution));
 };
 
 export const institutionsListController = async (
@@ -24,7 +25,7 @@ export const institutionsListController = async (
 ) => {
 	const institutionsList = await institutionsListService();
 
-	return res.status(200).send(institutionsList);
+	return res.status(200).send(instanceToPlain(institutionsList));
 };
 
 export const institutionDeleteController = async (
@@ -32,8 +33,8 @@ export const institutionDeleteController = async (
 	res: Response,
 ) => {
 	const { authorization } = req.headers;
-    const token = authorization!.split(" ")[1];
-    const { id } = jwt.decode(token) as {id: string};
+	const token = authorization!.split(" ")[1];
+	const { id } = jwt.decode(token) as { id: string };
 
 	await institutionDeleteService(id);
 
@@ -57,8 +58,8 @@ export const institutionUpdateController = async (
 	const data = req.body;
 
 	const { authorization } = req.headers;
-    const token = authorization!.split(" ")[1];
-    const { id } = jwt.decode(token) as {id: string};
+	const token = authorization!.split(" ")[1];
+	const { id } = jwt.decode(token) as { id: string };
 	data.id = id;
 
 	const updatedInstitution = await institutionUpdateService(data);
