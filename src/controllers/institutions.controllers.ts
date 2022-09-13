@@ -10,6 +10,7 @@ import institutionDonationService from "../services/institutions/institutionsDon
 
 import jwt from "jsonwebtoken";
 import listDonatedObjectsService from "../services/institutions/donatedObjectsList.service";
+import { institutionReceivesObjectService } from "../services/institutions/institutionReceivesObject.service";
 
 export const institutionCreateController = async (
 	req: Request,
@@ -96,3 +97,15 @@ export const institutionDonationController = async ( req: Request, res: Response
 	return res.status(200).send({message: "Item acquired!", institutionDonation })
 }
 
+export const institutionReceivesObjectController = async (req: Request, res: Response) => {
+
+	const { objectId } = req.params;
+
+	const { authorization } = req.headers;
+	const token = authorization!.split(" ")[1];
+    const { id } = jwt.decode(token) as {id: string};
+	const institutionId = id
+
+	const output = await institutionReceivesObjectService(objectId, institutionId);
+	return res.status(200).json(output);
+}
