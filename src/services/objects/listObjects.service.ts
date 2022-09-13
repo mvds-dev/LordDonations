@@ -3,11 +3,11 @@ import { Itens } from "../../entities/objects.entity";
 
 const listObjectsService = async () => {
 
-    const AddressesesRepository = AppDataSource.getRepository(Itens) 
+    const ItensRepository = AppDataSource.getRepository(Itens) 
 
-    const DadosAddresseses = await AddressesesRepository.find()
+    const DadosItens = await ItensRepository.find()
 
-    return DadosAddresseses
+    return DadosItens
 }
 
 export default listObjectsService
