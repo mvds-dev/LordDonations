@@ -4,11 +4,12 @@ import institutionLoginService from "../services/institutions/institutionLogin.s
 import institutionsCreateService from "../services/institutions/institutionsCreate.service";
 import institutionsListService from "../services/institutions/institutionsList.service";
 import institutionUpdateService from "../services/institutions/institutionUpdate.service";
+import { classToPlain, instanceToPlain } from "class-transformer";
 import institutionDonationService from "../services/institutions/institutionsDonations.service";
-import { instanceToPlain } from "class-transformer";
 
 
 import jwt from "jsonwebtoken";
+import listDonatedObjectsService from "../services/institutions/donatedObjectsList.service";
 
 export const institutionCreateController = async (
 	req: Request,
@@ -71,6 +72,18 @@ export const institutionUpdateController = async (
 		.send({ message: "Institution updated!", updatedInstitution });
 };
 
+export const listDonatedObjectsController = async (
+	req: Request,
+	res: Response,
+) => {
+	const { authorization } = req.headers;
+	const token = authorization!.split(" ")[1];
+	const { id } = jwt.decode(token) as { id: string };
+
+	const donatedObjects = await listDonatedObjectsService(id);
+	return res.status(200).send(instanceToPlain(donatedObjects));
+};
+
 export const institutionDonationController = async ( req: Request, res: Response) =>{
 	const objectID = req.params
 	const { authorization } = req.headers;
@@ -82,3 +95,4 @@ export const institutionDonationController = async ( req: Request, res: Response
 
 	return res.status(200).send({message: "Item acquired!", institutionDonation })
 }
+
