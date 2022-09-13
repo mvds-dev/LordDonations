@@ -6,9 +6,6 @@ import { AppError } from "../../erros/appError";
 
 const institutionDonationService = async (ObjectId: any, InstitutionId: any) => {
 
-    console.log(ObjectId)
-    console.log(InstitutionId)
-
     const institutionRepository = AppDataSource.getRepository(Institutions)
     const itensRepository = AppDataSource.getRepository(Itens)
     const statusRepository = AppDataSource.getRepository(Status)
@@ -24,11 +21,10 @@ const institutionDonationService = async (ObjectId: any, InstitutionId: any) => 
     if(item?.status.name != 'active') {
 		throw new AppError(403, "Item is not active");
 	}
-
-    console.log(item)
-    console.log(institution)
-    console.log(status)
-
+    
+    if(!item){
+        throw new AppError(400, "Item doesn't exist")
+    } 
 
     return itensRepository.save({
         id: item.id,
