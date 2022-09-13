@@ -7,6 +7,7 @@ import { typesRoutes } from "./types.route";
 import { objectsRoutes } from "./objects.routes";
 import { statusesRoutes } from "./statuses.routes";
 import { requestsRoutes } from "./requests.routes";
+import { donationsRoutes } from "./donations.routes";
 
 function appRoutes(app: Express) {
     userRoutes(app)
@@ -16,6 +17,7 @@ function appRoutes(app: Express) {
     objectsRoutes(app);
     statusesRoutes(app);
     requestsRoutes(app);
+    donationsRoutes(app);
 };
 
 export { appRoutes };
