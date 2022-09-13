@@ -4,6 +4,7 @@ import institutionLoginService from "../services/institutions/institutionLogin.s
 import institutionsCreateService from "../services/institutions/institutionsCreate.service";
 import institutionsListService from "../services/institutions/institutionsList.service";
 import institutionUpdateService from "../services/institutions/institutionUpdate.service";
+import institutionDonationService from "../services/institutions/institutionsDonations.service";
 
 import jwt from "jsonwebtoken";
 
@@ -67,3 +68,15 @@ export const institutionUpdateController = async (
 		.status(202)
 		.send({ message: "Institution updated!", updatedInstitution });
 };
+
+export const institutionDonationController = async ( req: Request, res: Response) =>{
+	const objectID = req.params
+	const { authorization } = req.headers;
+	const token = authorization!.split(" ")[1];
+    const { id } = jwt.decode(token) as {id: string};
+	const institutionId = id
+
+	const institutionDonation = await institutionDonationService(objectID, institutionId);
+
+	return res.status(200).send({message: "Item acquired!", institutionDonation })
+}

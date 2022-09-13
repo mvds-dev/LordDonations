@@ -1,6 +1,7 @@
 import {
 	institutionCreateController,
 	institutionDeleteController,
+	institutionDonationController,
 	institutionLoginController,
 	institutionsListController,
 	institutionUpdateController,
@@ -15,6 +16,7 @@ const institutionsRoutes = (app: Express) => {
 	app.delete("/institutions", verifyInstitutionAuthMiddleware, institutionDeleteController);
 	app.post("/institutions/login", institutionLoginController);
 	app.patch("/institutions", verifyInstitutionAuthMiddleware, institutionUpdateController);
+	app.post("/institutions/donations/:id", verifyInstitutionAuthMiddleware, institutionDonationController)
 };
 
 export { institutionsRoutes };
