@@ -9,13 +9,15 @@ const listObjectsByTypeService = async (typeId: any) => {
 		.leftJoinAndSelect("object.status", "status")
 		.getMany();
 
-	const objectsFiltredByType = objectsRepository.filter(
-		(object) => object.type.id === typeId,
-	);
+	const objectsFiltredByType = objectsRepository.filter((object) => object.type.id === typeId);
 
-	const objectsActive = objectsFiltredByType.filter(
-		(object) => object.status.name === "active",
-	);
+	const testType = objectsRepository.find((obj) => obj.type.id === typeId);
+
+	if (!testType) {
+		throw new AppError(404, "Invalid type");
+	}
+
+	const objectsActive = objectsFiltredByType.filter((object) => object.status.name === "active");
 
 	if (!objectsActive) {
 		throw new AppError(404, "No objects found");
