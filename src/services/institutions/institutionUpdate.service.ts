@@ -4,7 +4,6 @@ import { Institutions } from "../../entities/institution.entity";
 import { AppError } from "../../erros/appError";
 import { IInstitutionUpdate } from "../../interfaces/institutions";
 
-//Isso aqui precisa ser arrumado
 const institutionUpdateService = async ({ id, name, email, cnpj, password }: IInstitutionUpdate) => {
 	const institutionsRepository = AppDataSource.getRepository(Institutions);
 	const institutions = await institutionsRepository.find();
@@ -52,13 +51,14 @@ const institutionUpdateService = async ({ id, name, email, cnpj, password }: IIn
 		newPassword = await hash(password, 10);
 	}
 
-	return institutionsRepository.save({
+	await institutionsRepository.save({
 		id: id,
 		name,
 		email,
 		cnpj,
 		password: newPassword
 	});
+	return {message: "Instition updated!"};
 };
 
 export default institutionUpdateService;
