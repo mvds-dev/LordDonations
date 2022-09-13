@@ -3,6 +3,7 @@ import {
 	institutionDeleteController,
 	institutionDonationController,
 	institutionLoginController,
+	institutionReceivesObjectController,
 	institutionsListController,
 	institutionUpdateController,
 	listDonatedObjectsController,
@@ -30,6 +31,7 @@ const institutionsRoutes = (app: Express) => {
 		listDonatedObjectsController,
 	);
 	app.post("/institutions/donations/:id", verifyInstitutionAuthMiddleware, institutionDonationController)
+	app.patch("/institutions/donations/received/:objectId", verifyInstitutionAuthMiddleware, institutionReceivesObjectController);
 };
 
 export { institutionsRoutes };
