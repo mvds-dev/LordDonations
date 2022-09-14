@@ -14,7 +14,7 @@ const AppDataSource = new DataSource({
     process.env.NODE === "production"
       ? ["dist/src/migrations/**/*.{ts,js}"]
       : ["src/migrations/**/*.{ts,js}"],
-  synchronize: true,
+  synchronize: false,
   logging: true,
 });
 

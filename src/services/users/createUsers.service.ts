@@ -11,8 +11,8 @@ const createUserService = async ({
   email,
   password,
 }: IUserRequest): Promise<Users> => {
-  console.log("Service");
   const userRepository = AppDataSource.getRepository(Users);
+  console.log("Service");
 
   if (!name || !age || !cpf || !email || !password) {
     throw new AppError(400, "Request in wrong format");

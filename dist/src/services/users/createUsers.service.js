@@ -14,8 +14,8 @@ const users_entity_1 = require("../../entities/users.entity");
 const appError_1 = require("../../erros/appError");
 const bcrypt_1 = require("bcrypt");
 const createUserService = ({ name, age, cpf, email, password, }) => __awaiter(void 0, void 0, void 0, function* () {
-    console.log("Service");
     const userRepository = data_source_1.AppDataSource.getRepository(users_entity_1.Users);
+    console.log("Service");
     if (!name || !age || !cpf || !email || !password) {
         throw new appError_1.AppError(400, "Request in wrong format");
     }
