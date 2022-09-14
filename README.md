@@ -265,7 +265,7 @@ Vazio
 
 ## 2. **Types**
 
-O objeto User é definido como:
+O objeto types é definido como:
 
 | Campo       | Tipo    | Descrição                           |
 | ----------- | ------- | ----------------------------------- |
@@ -274,7 +274,7 @@ O objeto User é definido como:
 | description | string  | O nome do tipo.                     |
 | isActive    | boolean | Define se o tipo está ativo ou não. |
 
-### Endpoints
+### EndpointsTypes
 
 | Método | Rota   | Descrição             |
 | ------ | ------ | --------------------- |
@@ -284,7 +284,7 @@ O objeto User é definido como:
 
 ### 2.1. **Listando Types**
 
-[ Voltar para os Endpoints do Usuário ](#endpoints)
+[ Voltar para os Endpoints do Endpoints ](#EndpointsTypes)
 
 ### `/types`
 
@@ -600,7 +600,7 @@ Content-type: application/json
 
 ```
 PATCH /institutions
-Host: https://lord-donations.herokuapp.com/
+Host: https://lord-donatendpointsions.herokuapp.com/
 Authorization: Token
 Content-type: application/json
 ```
