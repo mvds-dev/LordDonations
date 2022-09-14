@@ -14,8 +14,8 @@ O objeto User é definido como:
 | password  | string  | A senha de acesso do usuário.                   |
 | age       | number  | A idade do usuário.                             |
 | cpf       | number  | O cpf do usuário.                               |
-| addressId | uuid    | Id com o endereço do usuário.                	|
-| isActive  | boolean | Define se um usuário está ativo ou não.    	|
+| addressId | uuid    | Id com o endereço do usuário.                   |
+| isActive  | boolean | Define se um usuário está ativo ou não.         |
 | createdAt | date    | Define a data de criação do usuário.            |
 | updatedAt | date    | Define a data de alguma atualização no usuário. |
 
@@ -267,18 +267,18 @@ Vazio
 
 O objeto User é definido como:
 
-| Campo     | Tipo    | Descrição                                       |
-| --------- | ------- | ----------------------------------------------- |
-| id        | uuid    | Identificador único do type.                    |
-| name      | string  | O nome do tipo.                                 |
-| description| string  | O nome do tipo.                                |
-| isActive  | boolean | Define se o tipo está ativo ou não.    	        |
+| Campo       | Tipo    | Descrição                           |
+| ----------- | ------- | ----------------------------------- |
+| id          | uuid    | Identificador único do type.        |
+| name        | string  | O nome do tipo.                     |
+| description | string  | O nome do tipo.                     |
+| isActive    | boolean | Define se o tipo está ativo ou não. |
 
 ### Endpoints
 
-| Método | Rota         | Descrição                               |
-| ------ | ------------ | --------------------------------------- |
-| LIST   | /types       | Lista todos os types.                   |
+| Método | Rota   | Descrição             |
+| ------ | ------ | --------------------- |
+| LIST   | /types | Lista todos os types. |
 
 ---
 
@@ -315,7 +315,7 @@ Vazio
 		"id": "9a5746a1-aaf0-4abb-a26e-1ede9eea12a0",
 		"name": "type A",
 		"description": "type A description",
-		"isActive": true,
+		"isActive": true
 	}
 ]
 ```
@@ -330,16 +330,16 @@ Nenhum, o máximo que pode acontecer é retornar uma lista vazia.
 
 O objeto Status é definido como:
 
-| Campo     | Tipo    | Descrição                                       |
-| --------- | ------- | ----------------------------------------------- |
-| id        | uuid    | Identificador único do Status.                  |
-| name      | string  | O nome do Status.                               |
+| Campo | Tipo   | Descrição                      |
+| ----- | ------ | ------------------------------ |
+| id    | uuid   | Identificador único do Status. |
+| name  | string | O nome do Status.              |
 
 ### EndpointsStatus
 
-| Método | Rota         | Descrição                               |
-| ------ | ------------ | --------------------------------------- |
-| GET    | /statuses    | Lista todos os status                   |
+| Método | Rota      | Descrição             |
+| ------ | --------- | --------------------- |
+| GET    | /statuses | Lista todos os status |
 
 ---
 
@@ -383,6 +383,360 @@ Vazio
 	{
 		"id": "f0054a06-5777-4c8b-980d-a53987ad5589",
 		"name": "received"
+	}
+]
+```
+
+### Possíveis Erros:
+
+Nenhum, o máximo que pode acontecer é retornar uma lista vazia.
+
+---
+
+## 4. **Institutions**
+
+O objeto Institutions é definido como:
+
+| Campo     | Tipo    | Descrição                                           |
+| --------- | ------- | --------------------------------------------------- |
+| id        | uuid    | Identificador único da instituição.                 |
+| name      | string  | O nome da instituição.                              |
+| email     | string  | O e-mail da instituição.                            |
+| password  | string  | A senha de acesso da instituição.                   |
+| cnpj      | string  | O cnpj da instituição.                              |
+| addressId | uuid    | Id com o endereço da instituição.                   |
+| isActive  | boolean | Define se uma instituição está ativa ou não.        |
+| createdAt | date    | Define a data de criação da instituição.            |
+| updatedAt | date    | Define a data de alguma atualização na instituição. |
+
+### Endpoints Institution
+
+| Método | Rota                            | Descrição                                           |
+| ------ | ------------------------------- | --------------------------------------------------- |
+| POST   | /institutions                   | Criação de um instituição.                          |
+| GET    | /institutions                   | Lista todas as instituições.                        |
+| POST   | /institutions/login             | Faz o login da instituição gerando um token.        |
+| PATCH  | /institutions                   | Atualiza os dados de uma instituição.               |
+| DELETE | /institutions                   | Realiza um softdelete na instituição.               |
+| GET    | /institutions/donations/donated | Lista todos os objetos doados para uma instituição. |
+
+---
+
+### 4.1. **Criação de Instituição**
+
+[ Voltar para os Endpoints da Instituição ](#endpoints-institution)
+
+### `/institutions`
+
+### Exemplo de Request:
+
+```
+POST /institutions
+Host: https://lord-donations.herokuapp.com/
+Authorization: None
+Content-type: application/json
+```
+
+### Corpo da Requisição:
+
+```json
+{
+	"name": "nome",
+	"email": "email@mail.com",
+	"password": "123",
+	"cnpj": "00.000.000/0001-00"
+
+    {
+	"name":"nome",
+	"email":"email@mail.com",
+	"password":"123",
+	"cnpj":"00.000.000/0001-00",
+	"address": {
+		"city": "cidade",
+		"state": "st",
+		"number": 1,
+		"cep": "00000‑000",
+		"district": "bairro"
+	}
+}
+}
+```
+
+### Exemplo de Response:
+
+```
+201 Created
+```
+
+```json
+{
+	"name": "nome",
+	"email": "email@mail.com",
+	"cnpj": "00.000.000/0001-00",
+	"isActive": true,
+	"id": "1e33db4f-4e97-459d-9e3d-7b2eeffc4f8e",
+	"createdAt": "2022-09-12T19:11:21.483Z",
+	"updatedAt": "2022-09-12T19:11:21.483Z",
+	"address": {
+		"city": "cidade",
+		"state": "st",
+		"number": 1,
+		"cep": "00000‑000",
+		"district": "bairro"
+	}
+}
+```
+
+### Possíveis Erros:
+
+| Código do Erro  | Descrição            |
+| --------------- | -------------------- |
+| 400 Bad Request | Email already exists |
+| 400 Bad Request | CNPJ already exists  |
+| 400 Bad Request | Some data is missing |
+
+---
+
+### 4.2. **Listando Instituições**
+
+[ Voltar para os Endpoints da Instituição ](#endpoints-institution)
+
+### `/institutions`
+
+### Exemplo de Request:
+
+```
+GET /institutions
+Host: https://lord-donations.herokuapp.com/
+Authorization: None
+Content-type: application/json
+```
+
+### Corpo da Requisição:
+
+```
+Vazio
+```
+
+### Exemplo de Response:
+
+```
+200 OK
+```
+
+```json
+[
+	{
+		"id": "9a5746a1-aaf0-4abb-a26e-1ede9eea12a0",
+		"name": "nome",
+		"email": "email@mail.com",
+		"cnpj": "00.000.000/0001-00",
+		"createdAt": "2022-09-12T14:06:31.179Z",
+		"updatedAt": "2022-09-12T17:53:24.098Z",
+		"isActive": true
+	}
+]
+```
+
+### Possíveis Erros:
+
+Nenhum, o máximo que pode acontecer é retornar uma lista vazia.
+
+---
+
+### 4.3. **Login de Instituição**
+
+[ Voltar para os Endpoints da Instituição ](#endpoints-institution)
+
+### `/institutions/login`
+
+### Exemplo de Request:
+
+```
+POST /institutions/login
+Host: https://lord-donations.herokuapp.com/
+Authorization: None
+Content-type: application/json
+```
+
+### Corpo da Requisição:
+
+```json
+{
+	"email": "email@mail.com",
+	"password": "123"
+}
+```
+
+### Exemplo de Response:
+
+```
+202 Accepted
+```
+
+```json
+{
+	"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjlhNTc0NmExLWFhZjAtNGFiYi1hMjZlLTFlZGU5ZWVhMTJhMCIsInVzZXJUeXBlIjoidXNlciIsImlhdCI6MTY2MzAwOTk5OCwiZXhwIjoxNjYzMDk2Mzk4fQ.BTy8nrPj6Ojbb6ZQwfSb_Egw7ORHWAY8Ot9xWpX6IQc"
+}
+```
+
+### Possíveis Erros:
+
+| Código do Erro  | Descrição                    |
+| --------------- | ---------------------------- |
+| 400 Bad request | Email or password is missing |
+| 404 Not found   | Wrong email/password         |
+| 403 Forbidden   | Institution is deactivated   |
+
+---
+
+### 4.4. **Atualização de Instituições**
+
+[ Voltar para os Endpoints da Instituição ](#endpoints-institution)
+
+### `/institutions`
+
+### Exemplo de Request:
+
+```
+PATCH /institutions
+Host: https://lord-donations.herokuapp.com/
+Authorization: Token
+Content-type: application/json
+```
+
+### Corpo da Requisição:
+
+```json
+{
+	"name": "nameUpdated",
+	"email": "emailUpdated@mail.com",
+	"password": "321",
+	"cnpj": "00.000.000/0001-11"
+}
+```
+
+### Exemplo de Response:
+
+```
+202 Accepted
+```
+
+```json
+{
+	"message": "Instition updated!"
+}
+```
+
+### Possíveis Erros:
+
+| Código do Erro  | Descrição                  |
+| --------------- | -------------------------- |
+| 400 Bad request | Nothing to update          |
+| 404 Not found   | Institution not found      |
+| 400 Bad request | Institution is deactivated |
+| 400 Bad request | Email already exists       |
+| 400 Bad request | CNPJ already exists        |
+| 409 Conflict    | Try a different email      |
+| 409 Conflict    | Try a different name       |
+
+---
+
+### 4.5. **Deleção de Instituições**
+
+[ Voltar para os Endpoints da Instituição ](#endpoints-institution)
+
+### `/institutions`
+
+### Exemplo de Request:
+
+```
+DELETE /institutions
+Host: https://lord-donations.herokuapp.com/
+Authorization: Token
+Content-type: application/json
+```
+
+### Corpo da Requisição:
+
+```
+Vazio
+```
+
+### Exemplo de Response:
+
+```
+202 Accepted
+```
+
+```json
+{
+	"message": "Institution deleted with success!"
+}
+```
+
+### Possíveis Erros:
+
+| Código do Erro  | Descrição                       |
+| --------------- | ------------------------------- |
+| 400 Bad request | Institution already deactivated |
+| 404 Not found   | Institution not found           |
+
+---
+
+### 4.6. **Listando os objetos doados de uma Instituição**
+
+[ Voltar para os Endpoints da Instituição ](#endpoints-institution)
+
+### `/institutions/donations/donated`
+
+### Exemplo de Request:
+
+```
+GET /institutions/donations/donated
+Host: https://lord-donations.herokuapp.com/
+Authorization: Token
+Content-type: application/json
+```
+
+### Corpo da Requisição:
+
+```
+Vazio
+```
+
+### Exemplo de Response:
+
+```
+200 OK
+```
+
+```json
+[
+	{
+		"id": "629c19e9-5f10-4fc2-b8bf-82c91792fe01",
+		"name": "nome do Objeto",
+		"description": "descrição do Objeto",
+		"institution": {
+			"id": "2a1198d7-03ba-418b-a7b4-e817820d780c",
+			"name": "nome da Instituição",
+			"email": "institution@mail.com",
+			"cnpj": "00.000.000/0001-00",
+			"createdAt": "2022-09-12T13:59:14.489Z",
+			"updatedAt": "2022-09-12T13:59:14.489Z",
+			"isActive": true,
+			"address": {
+				"city": "cidade",
+				"state": "st",
+				"number": 1,
+				"cep": "00000‑000",
+				"district": "bairro"
+			}
+		},
+		"status": {
+			"id": "0f55fb57-b9cf-4365-990d-93d54466c171",
+			"name": "received"
+		}
 	}
 ]
 ```
