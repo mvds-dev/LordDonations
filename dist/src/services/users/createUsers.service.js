@@ -15,7 +15,6 @@ const appError_1 = require("../../erros/appError");
 const bcrypt_1 = require("bcrypt");
 const createUserService = ({ name, age, cpf, email, password, }) => __awaiter(void 0, void 0, void 0, function* () {
     const userRepository = data_source_1.AppDataSource.getRepository(users_entity_1.Users);
-    console.log("Service");
     if (!name || !age || !cpf || !email || !password) {
         throw new appError_1.AppError(400, "Request in wrong format");
     }
@@ -26,10 +25,12 @@ const createUserService = ({ name, age, cpf, email, password, }) => __awaiter(vo
     const userAlreadyExists = yield userRepository.findOne({
         where: [{ email: email }, { cpf: cpf }],
     });
+    console.log("ServiceFind");
     if (userAlreadyExists) {
         throw new appError_1.AppError(401, "User already exists");
     }
     const hashedPassword = yield (0, bcrypt_1.hash)(password, 10);
+    console.log("Hash Service");
     const user = userRepository.create({
         name,
         email,
@@ -37,7 +38,9 @@ const createUserService = ({ name, age, cpf, email, password, }) => __awaiter(vo
         cpf,
         password: hashedPassword,
     });
+    console.log("Create User");
     yield userRepository.save(user);
+    console.log("Save");
     return user;
 });
 exports.default = createUserService;

@@ -12,7 +12,6 @@ const createUserService = async ({
   password,
 }: IUserRequest): Promise<Users> => {
   const userRepository = AppDataSource.getRepository(Users);
-  console.log("Service");
 
   if (!name || !age || !cpf || !email || !password) {
     throw new AppError(400, "Request in wrong format");
@@ -25,13 +24,14 @@ const createUserService = async ({
   const userAlreadyExists = await userRepository.findOne({
     where: [{ email: email }, { cpf: cpf }],
   });
+  console.log("ServiceFind");
 
   if (userAlreadyExists) {
     throw new AppError(401, "User already exists");
   }
 
   const hashedPassword = await hash(password, 10);
-
+  console.log("Hash Service");
   const user = userRepository.create({
     name,
     email,
@@ -39,9 +39,9 @@ const createUserService = async ({
     cpf,
     password: hashedPassword,
   });
-
+  console.log("Create User");
   await userRepository.save(user);
-
+  console.log("Save");
   return user;
 };
 
