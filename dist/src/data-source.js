@@ -6,7 +6,8 @@ require("dotenv/config");
 const AppDataSource = new typeorm_1.DataSource({
     type: "postgres",
     url: process.env.DATABASE_URL,
-    ssl: process.env.NODE === "production" ? { rejectUnauthorized: false } : false,
+    ssl: true,
+    extra: { ssl: { rejectUnauthorized: false } },
     entities: process.env.NODE === "production"
         ? ["dist/src/entities/**/*.{ts,js}"]
         : ["src/entities/**/*.{ts,js}"],
