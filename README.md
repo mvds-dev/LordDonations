@@ -262,3 +262,66 @@ Vazio
 | 404 Not found   | User does not exist |
 
 ---
+
+## 2. **Types**
+
+O objeto User é definido como:
+
+| Campo     | Tipo    | Descrição                                       |
+| --------- | ------- | ----------------------------------------------- |
+| id        | uuid    | Identificador único do type.                    |
+| name      | string  | O nome do tipo.                                 |
+| description| string  | O nome do tipo.                                |
+| isActive  | boolean | Define se o tipo está ativo ou não.    	        |
+
+### Endpoints
+
+| Método | Rota         | Descrição                               |
+| ------ | ------------ | --------------------------------------- |
+| LIST   | /types       | Lista todos os types.                   |
+
+---
+
+### 2.1. **Listando Types**
+
+[ Voltar para os Endpoints do Usuário ](#endpoints)
+
+### `/types`
+
+### Exemplo de Request:
+
+```
+GET /types
+Host: http://localhost:3333
+Authorization: None
+Content-type: application/json
+```
+
+### Corpo da Requisição:
+
+```
+Vazio
+```
+
+### Exemplo de Response:
+
+```
+200 OK
+```
+
+```json
+[
+	{
+		"id": "9a5746a1-aaf0-4abb-a26e-1ede9eea12a0",
+		"name": "type A",
+		"description": "type A description",
+		"isActive": true,
+	}
+]
+```
+
+### Possíveis Erros:
+
+Nenhum, o máximo que pode acontecer é retornar uma lista vazia.
+
+---
