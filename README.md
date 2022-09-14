@@ -370,7 +370,7 @@ Vazio
 Nenhum, o máximo que pode acontecer é retornar uma lista vazia.
 
 
-### `DELETE /delete/:objectId`
+### `DELETE /objects/:objectId`
 
 ### Exemplo de Request:
 
@@ -470,7 +470,7 @@ Content-type: application/json
 ### Exemplo de Request:
 
 ```
-post /objects
+patch /objects/:objectId
 Host: http://localhost:3333
 Authorization: token
 Content-type: application/json
