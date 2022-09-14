@@ -1,6 +1,101 @@
-## projeto_final_m4
+## Projeto Final M4 - Lord Donations
 
 Projeto de conclusão do quarto módulo.
+
+# Documentação da API
+
+## Tabela de Conteúdos
+
+- [Visão Geral](#1-visão-geral)
+- [Diagrama ER](#2-diagrama-er)
+- [Início Rápido](#3-início-rápido)
+  - [Instalando Dependências](#31-instalando-dependências)
+  - [Variáveis de Ambiente](#32-variáveis-de-ambiente)
+  - [Migrations](#33-migrations)
+- [Autenticação](#4-autenticação)
+- [Endpoints](#5-endpoints)
+
+---
+
+## 1. Visão Geral
+
+Visão geral do projeto, um pouco das tecnologias usadas.
+
+- [NodeJS](https://nodejs.org/en/)
+- [Express](https://expressjs.com/pt-br/)
+- [TypeScript](https://www.typescriptlang.org/)
+- [PostgreSQL](https://www.postgresql.org/)
+- [TypeORM](https://typeorm.io/)
+
+A URL base da aplicação:
+https://lord-donations.herokuapp.com/
+
+---
+
+## 2. Diagrama ER
+
+[ Voltar para o topo ](#tabela-de-conteúdos)
+
+Diagrama ER da API definindo bem as relações entre as tabelas do banco de dados.
+
+![DER](Capstone-DER-ProjetoM4.jpg)
+
+---
+
+## 3. Início Rápido
+
+[ Voltar para o topo ](#tabela-de-conteúdos)
+
+### 3.1. Instalando Dependências
+
+Clone o projeto em sua máquina e instale as dependências com o comando:
+
+```shell
+yarn
+```
+
+### 3.2. Variáveis de Ambiente
+
+Em seguida, crie um arquivo **.env**, copiando o formato do arquivo **.env.example**:
+
+```
+cp .env.example .env
+```
+
+Configure suas variáveis de ambiente com suas credenciais do Postgres e uma nova database da sua escolha.
+
+### 3.3. Migrations
+
+Execute as migrations com o comando:
+
+```
+yarn typeorm migration:run -d src/data-source.ts
+```
+
+---
+
+## 4. Autenticação
+
+[ Voltar para o topo ](#tabela-de-conteúdos)
+
+Por enquanto, não foi implementada autenticação.
+
+---
+
+## 5. Endpoints
+
+[ Voltar para o topo ](#tabela-de-conteúdos)
+
+### Índice
+
+- [Users](#1-users)
+- [Types](#2-types)
+- [Statuses](#3-statuses)
+- [Institutions](#4-institutions)
+- [Addresses](#5-addresses)
+- [Requests](#6-requests)
+
+---
 
 ## 1. **Users**
 
@@ -19,7 +114,7 @@ O objeto User é definido como:
 | createdAt | date    | Define a data de criação do usuário.            |
 | updatedAt | date    | Define a data de alguma atualização no usuário. |
 
-### Endpoints
+### Endpoints Users
 
 | Método | Rota         | Descrição                               |
 | ------ | ------------ | --------------------------------------- |
@@ -33,7 +128,7 @@ O objeto User é definido como:
 
 ### 1.1. **Criação de Usuário**
 
-[ Voltar para os Endpoints do Usuário ](#endpoints)
+[ Voltar para os Endpoints do Usuário ](#endpoints-Users)
 
 ### `/users`
 
@@ -41,7 +136,7 @@ O objeto User é definido como:
 
 ```
 POST /users
-Host: http://localhost:3333
+Host: https://lord-donations.herokuapp.com/
 Authorization: None
 Content-type: application/json
 ```
@@ -88,7 +183,7 @@ Content-type: application/json
 
 ### 1.2. **Listando Usuários**
 
-[ Voltar para os Endpoints do Usuário ](#endpoints)
+[ Voltar para os Endpoints do Usuário ](#endpoints-Users)
 
 ### `/users`
 
@@ -96,7 +191,7 @@ Content-type: application/json
 
 ```
 GET /users
-Host: http://localhost:3333
+Host: https://lord-donations.herokuapp.com/
 Authorization: None
 Content-type: application/json
 ```
@@ -136,7 +231,7 @@ Nenhum, o máximo que pode acontecer é retornar uma lista vazia.
 
 ### 1.3. **Login de Usuários**
 
-[ Voltar para os Endpoints do Usuário ](#endpoints)
+[ Voltar para os Endpoints do Usuário ](#endpoints-Users)
 
 ### `/users/login`
 
@@ -144,7 +239,7 @@ Nenhum, o máximo que pode acontecer é retornar uma lista vazia.
 
 ```
 POST /users/login
-Host: http://localhost:3333
+Host: https://lord-donations.herokuapp.com/
 Authorization: None
 Content-type: application/json
 ```
@@ -182,7 +277,7 @@ Content-type: application/json
 
 ### 1.4. **Atualização de Usuários**
 
-[ Voltar para os Endpoints do Usuário ](#endpoints)
+[ Voltar para os Endpoints do Usuário ](#endpoints-Users)
 
 ### `/users`
 
@@ -190,7 +285,7 @@ Content-type: application/json
 
 ```
 PATCH /users
-Host: http://localhost:3333
+Host: https://lord-donations.herokuapp.com/
 Authorization: Token
 Content-type: application/json
 ```
@@ -229,7 +324,7 @@ Content-type: application/json
 
 ### 1.5. **Deleção de Usuários**
 
-[ Voltar para os Endpoints do Usuário ](#endpoints)
+[ Voltar para os Endpoints do Usuário ](#endpoints-Users)
 
 ### `/users`
 
@@ -237,7 +332,7 @@ Content-type: application/json
 
 ```
 DELETE /users
-Host: http://localhost:3333
+Host: https://lord-donations.herokuapp.com/
 Authorization: Token
 Content-type: application/json
 ```
@@ -274,7 +369,7 @@ O objeto types é definido como:
 | description | string  | O nome do tipo.                     |
 | isActive    | boolean | Define se o tipo está ativo ou não. |
 
-### EndpointsTypes
+### Endpoints Types
 
 | Método | Rota   | Descrição             |
 | ------ | ------ | --------------------- |
@@ -284,7 +379,7 @@ O objeto types é definido como:
 
 ### 2.1. **Listando Types**
 
-[ Voltar para os Endpoints do Types ](#EndpointsTypes)
+[ Voltar para os Endpoints do Types ](#endpoints-types)
 
 ### `/types`
 
@@ -292,7 +387,7 @@ O objeto types é definido como:
 
 ```
 GET /types
-Host: http://localhost:3333
+Host: https://lord-donations.herokuapp.com/
 Authorization: None
 Content-type: application/json
 ```
@@ -335,7 +430,7 @@ O objeto Status é definido como:
 | id    | uuid   | Identificador único do Status. |
 | name  | string | O nome do Status.              |
 
-### EndpointsStatus
+### Endpoints Status
 
 | Método | Rota      | Descrição             |
 | ------ | --------- | --------------------- |
@@ -345,7 +440,7 @@ O objeto Status é definido como:
 
 ### 3.1. **Listando os Status**
 
-[ Voltar para os Endpoints do Status ](#endpointsStatus)
+[ Voltar para os Endpoints do Status ](#endpoints-status)
 
 ### `/statuses`
 
@@ -353,7 +448,7 @@ O objeto Status é definido como:
 
 ```
 GET /statuses
-Host: http://localhost:3333
+Host: https://lord-donations.herokuapp.com/
 Authorization: None
 Content-type: application/json
 ```
@@ -751,28 +846,28 @@ Nenhum, o máximo que pode acontecer é retornar uma lista vazia.
 
 O objeto Address é definido como:
 
-| Campo     | Tipo    | Descrição                                       |
-| --------- | ------- | ----------------------------------------------- |
-| id        | uuid    | Identificador único do address.                 |
-| city      | string  | O nome do address.                              |
-| state     | string  | O estado do address.                            |
-| number    | number  | O número do address.                            |
-| cep       | string  | O CEP do adress.                                |
-| district  | string  | O bairro do address.                            |
+| Campo    | Tipo   | Descrição                       |
+| -------- | ------ | ------------------------------- |
+| id       | uuid   | Identificador único do address. |
+| city     | string | O nome do address.              |
+| state    | string | O estado do address.            |
+| number   | number | O número do address.            |
+| cep      | string | O CEP do adress.                |
+| district | string | O bairro do address.            |
 
-### EndpointsAddress
+### Endpoints Address
 
-| Método | Rota         | Descrição                               |
-| ------ | ------------ | --------------------------------------- |
-| POST   | /addresses   | Criação de um address.                  |
-| GET    | /addresses   | Lista todos os addresses.               |
-| PATCH  | /addresses/:id   | Atualiza os dados do address.           |
+| Método | Rota           | Descrição                     |
+| ------ | -------------- | ----------------------------- |
+| POST   | /addresses     | Criação de um address.        |
+| GET    | /addresses     | Lista todos os addresses.     |
+| PATCH  | /addresses/:id | Atualiza os dados do address. |
 
 ---
 
 ### 5.1. **Criação de Address**
 
-[ Voltar para os Endpoints do Address ](#endpointsAddress)
+[ Voltar para os Endpoints do Address ](#endpoints-address)
 
 ### `/addresses`
 
@@ -780,7 +875,7 @@ O objeto Address é definido como:
 
 ```
 POST /addresses
-Host: http://localhost:3333
+Host: https://lord-donations.herokuapp.com/
 Authorization: None
 Content-type: application/json
 ```
@@ -825,7 +920,7 @@ Content-type: application/json
 
 ### 5.2. **Listando Addresses**
 
-[ Voltar para os Endpoints do Address ](#endpointsAddress)
+[ Voltar para os Endpoints do Address ](#endpoints-address)
 
 ### `/addresses`
 
@@ -833,7 +928,7 @@ Content-type: application/json
 
 ```
 GET /addresses
-Host: http://localhost:3333
+Host: https://lord-donations.herokuapp.com/
 Authorization: None
 Content-type: application/json
 ```
@@ -871,7 +966,7 @@ Nenhum, o máximo que pode acontecer é retornar uma lista vazia.
 
 ### 5.3. **Atualização de Address**
 
-[ Voltar para os Endpoints do Address ](#endpointsAddress)
+[ Voltar para os Endpoints do Address ](#endpoints-address)
 
 ### `/addresses/:id`
 
@@ -879,7 +974,7 @@ Nenhum, o máximo que pode acontecer é retornar uma lista vazia.
 
 ```
 PATCH /addresses/:id
-Host: http://localhost:3333
+Host: https://lord-donations.herokuapp.com/
 Authorization: Token
 Content-type: application/json
 ```
@@ -888,9 +983,9 @@ Content-type: application/json
 
 ```json
 {
-		"city": "test4",
-		"state": "ts4",
-		"number": "4"
+	"city": "test4",
+	"state": "ts4",
+	"number": "4"
 }
 ```
 
@@ -911,15 +1006,15 @@ Content-type: application/json
 
 ### Possíveis Erros:
 
-| Código do Erro  | Descrição      |
-| --------------- | -------------- |
-| 400 Bad request | Wrong format   |
-| 404 Not found   | Address not found |
-| 401 Unauthorized   | Invalid token |
+| Código do Erro   | Descrição         |
+| ---------------- | ----------------- |
+| 400 Bad request  | Wrong format      |
+| 404 Not found    | Address not found |
+| 401 Unauthorized | Invalid token     |
 
 ---
 
-## 5. **Requests**
+## 6. **Requests**
 
 O objeto Request é definido como:
 
@@ -933,16 +1028,16 @@ O objeto Request é definido como:
 
 ### Endpoints Requests
 
-| Método | Rota                | Descrição                            |
-| ------ | ------------------- | ------------------------------------ |
-| GET    | /requests           | Lista todos os requests.             |
-| POST   | /requests           | Criação de um request.               |
-| PATCH  | /requests/:requestId | Atualiza os dados de um request.    |
-| DELETE | /requests/:requestId | Realiza um softdelete em um request.|
+| Método | Rota                 | Descrição                            |
+| ------ | -------------------- | ------------------------------------ |
+| GET    | /requests            | Lista todos os requests.             |
+| POST   | /requests            | Criação de um request.               |
+| PATCH  | /requests/:requestId | Atualiza os dados de um request.     |
+| DELETE | /requests/:requestId | Realiza um softdelete em um request. |
 
 ---
 
-### 5.1. **Listando Requests**
+### 6.1. **Listando Requests**
 
 [ Voltar para os Endpoints do Request ](#endpoints-requests)
 
@@ -985,7 +1080,7 @@ Nenhum, o máximo que pode acontecer é retornar uma lista vazia.
 
 ---
 
-### 5.2. **Criação de Requisições**
+### 6.2. **Criação de Requisições**
 
 [ Voltar para os Endpoints do Request ](#endpoints-requests)
 
@@ -1052,7 +1147,7 @@ Content-type: application/json
 
 ---
 
-### 5.3. **Atualização de Requisições**
+### 6.3. **Atualização de Requisições**
 
 [ Voltar para os Endpoints do Request ](#endpoints-requests)
 
@@ -1098,7 +1193,7 @@ Content-type: application/json
 
 ---
 
-### 5.4. **Deleção de Requisições**
+### 6.4. **Deleção de Requisições**
 
 [ Voltar para os Endpoints do Request ](#endpoints-requests)
 
@@ -1133,3 +1228,5 @@ Vazio
 | 404 Not found  | Request not found     |
 
 ---
+
+[ Voltar para o Topo ](#documentação-da-api)
