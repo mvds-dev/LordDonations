@@ -14,3 +14,16 @@ export interface IInstitution {
 	updatedAt: Date;
 	isActive: boolean;
 }
+
+export interface IInstitutionLogin {
+	email: string;
+	password: string;
+}
+
+export interface IInstitutionUpdate {
+	id: string,
+	name?: string,
+	email?: string,
+	cnpj?: string,
+	password?: string
+}
