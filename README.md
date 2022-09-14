@@ -1,46 +1,37 @@
-## projeto_final_m4
 
-Projeto de conclusão do quarto módulo.
+## 5. **Addresses**
 
-## 1. **Users**
-
-O objeto User é definido como:
+O objeto Address é definido como:
 
 | Campo     | Tipo    | Descrição                                       |
 | --------- | ------- | ----------------------------------------------- |
-| id        | uuid    | Identificador único do usuário.                 |
-| name      | string  | O nome do usuário.                              |
-| email     | string  | O e-mail do usuário.                            |
-| password  | string  | A senha de acesso do usuário.                   |
-| age       | number  | A idade do usuário.                             |
-| cpf       | number  | O cpf do usuário.                               |
-| addressId | uuid    | Id com o endereço do usuário.                	|
-| isActive  | boolean | Define se um usuário está ativo ou não.    	|
-| createdAt | date    | Define a data de criação do usuário.            |
-| updatedAt | date    | Define a data de alguma atualização no usuário. |
+| id        | uuid    | Identificador único do address.                 |
+| city      | string  | O nome do address.                              |
+| state     | string  | O estado do address.                            |
+| number    | number  | O número do address.                            |
+| cep       | string  | O CEP do adress.                                |
+| district  | string  | O bairro do address.                            |
 
-### Endpoints
+### EndpointsAddress
 
 | Método | Rota         | Descrição                               |
 | ------ | ------------ | --------------------------------------- |
-| POST   | /users       | Criação de um usuário.                  |
-| GET    | /users       | Lista todos os usuários                 |
-| POST   | /users/login | Faz o login do usuário gerando um token |
-| PATCH  | /users       | Atualiza os dados do usuário            |
-| DELETE | /users       | Realiza um softdelete no usuário        |
+| POST   | /addresses   | Criação de um address.                  |
+| GET    | /addresses   | Lista todos os addresses.               |
+| PATCH  | /addresses/:id   | Atualiza os dados do address.           |
 
 ---
 
-### 1.1. **Criação de Usuário**
+### 5.1. **Criação de Address**
 
-[ Voltar para os Endpoints do Usuário ](#endpoints)
+[ Voltar para os Endpoints do Address ](#endpointsAddress)
 
-### `/users`
+### `/addresses`
 
 ### Exemplo de Request:
 
 ```
-POST /users
+POST /addresses
 Host: http://localhost:3333
 Authorization: None
 Content-type: application/json
@@ -50,11 +41,11 @@ Content-type: application/json
 
 ```json
 {
-	"name": "nome",
-	"email": "email@mail.com",
-	"password": "123",
-	"age": 20,
-	"cpf": "000.000.000-00"
+	"city": "test",
+	"state": "ts",
+	"number": 3,
+	"cep": "1",
+	"district": "test"
 }
 ```
 
@@ -66,14 +57,12 @@ Content-type: application/json
 
 ```json
 {
-	"name": "nome",
-	"email": "email@mail.com",
-	"age": 20,
-	"cpf": "000.000.000-00",
-	"id": "1e33db4f-4e97-459d-9e3d-7b2eeffc4f8e",
-	"isActive": true,
-	"createdAt": "2022-09-12T19:11:21.483Z",
-	"updatedAt": "2022-09-12T19:11:21.483Z"
+	"id": "27cabe5e-013e-4cb6-9e8f-99105b290cc1",
+	"city": "test",
+	"state": "ts",
+	"number": 3,
+	"cep": "1",
+	"district": "test"
 }
 ```
 
@@ -81,21 +70,21 @@ Content-type: application/json
 
 | Código do Erro  | Descrição               |
 | --------------- | ----------------------- |
-| 401 Conflict    | User already exists     |
+| 409 Conflict    | Address already exists  |
 | 400 Bad request | Request in wrong format |
 
 ---
 
-### 1.2. **Listando Usuários**
+### 5.2. **Listando Addresses**
 
-[ Voltar para os Endpoints do Usuário ](#endpoints)
+[ Voltar para os Endpoints do Address ](#endpointsAddress)
 
-### `/users`
+### `/addresses`
 
 ### Exemplo de Request:
 
 ```
-GET /users
+GET /addresses
 Host: http://localhost:3333
 Authorization: None
 Content-type: application/json
@@ -116,14 +105,12 @@ Vazio
 ```json
 [
 	{
-		"id": "9a5746a1-aaf0-4abb-a26e-1ede9eea12a0",
-		"name": "nome",
-		"email": "email@mail.com",
-		"age": 20,
-		"cpf": "000.000.000-00",
-		"isActive": true,
-		"createdAt": "2022-09-12T14:06:31.179Z",
-		"updatedAt": "2022-09-12T17:53:24.098Z"
+		"id": "27cabe5e-013e-4cb6-9e8f-99105b290cc1",
+		"city": "test",
+		"state": "ts",
+		"number": "3",
+		"cep": "1",
+		"district": "test"
 	}
 ]
 ```
@@ -134,62 +121,16 @@ Nenhum, o máximo que pode acontecer é retornar uma lista vazia.
 
 ---
 
-### 1.3. **Login de Usuários**
+### 5.3. **Atualização de Address**
 
-[ Voltar para os Endpoints do Usuário ](#endpoints)
+[ Voltar para os Endpoints do Address ](#endpointsAddress)
 
-### `/users/login`
-
-### Exemplo de Request:
-
-```
-POST /users/login
-Host: http://localhost:3333
-Authorization: None
-Content-type: application/json
-```
-
-### Corpo da Requisição:
-
-```json
-{
-	"email": "email@mail.com",
-	"password": "123"
-}
-```
-
-### Exemplo de Response:
-
-```
-200 Ok
-```
-
-```json
-{
-	"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjlhNTc0NmExLWFhZjAtNGFiYi1hMjZlLTFlZGU5ZWVhMTJhMCIsInVzZXJUeXBlIjoidXNlciIsImlhdCI6MTY2MzAwOTk5OCwiZXhwIjoxNjYzMDk2Mzk4fQ.BTy8nrPj6Ojbb6ZQwfSb_Egw7ORHWAY8Ot9xWpX6IQc"
-}
-```
-
-### Possíveis Erros:
-
-| Código do Erro  | Descrição               |
-| --------------- | ----------------------- |
-| 400 Bad request | Request in wrong format |
-| 404 Not found   | Wrong email/password    |
-| 400 Not found   | User is not active      |
-
----
-
-### 1.4. **Atualização de Usuários**
-
-[ Voltar para os Endpoints do Usuário ](#endpoints)
-
-### `/users`
+### `/addresses/:id`
 
 ### Exemplo de Request:
 
 ```
-PATCH /users
+PATCH /addresses/:id
 Host: http://localhost:3333
 Authorization: Token
 Content-type: application/json
@@ -199,10 +140,9 @@ Content-type: application/json
 
 ```json
 {
-	"name": "nameUpdated",
-	"email": "emailUpdated@mail.com",
-	"password": "321",
-	"age": 21
+		"city": "test4",
+		"state": "ts4",
+		"number": "4"
 }
 ```
 
@@ -214,7 +154,10 @@ Content-type: application/json
 
 ```json
 {
-	"message": "User updated"
+	"id": "27cabe5e-013e-4cb6-9e8f-99105b290cc1",
+	"city": "test4",
+	"state": "ts4",
+	"number": "4"
 }
 ```
 
@@ -223,42 +166,7 @@ Content-type: application/json
 | Código do Erro  | Descrição      |
 | --------------- | -------------- |
 | 400 Bad request | Wrong format   |
-| 404 Not found   | User not found |
-
----
-
-### 1.5. **Deleção de Usuários**
-
-[ Voltar para os Endpoints do Usuário ](#endpoints)
-
-### `/users`
-
-### Exemplo de Request:
-
-```
-DELETE /users
-Host: http://localhost:3333
-Authorization: Token
-Content-type: application/json
-```
-
-### Corpo da Requisição:
-
-```
-Vazio
-```
-
-### Exemplo de Response:
-
-```
-204 No content
-```
-
-### Possíveis Erros:
-
-| Código do Erro  | Descrição           |
-| --------------- | ------------------- |
-| 400 Bad request | Inactive User       |
-| 404 Not found   | User does not exist |
+| 404 Not found   | Address not found |
+| 401 Unauthorized   | Invalid token |
 
 ---
