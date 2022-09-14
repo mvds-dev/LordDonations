@@ -7,6 +7,8 @@ import listAdressesService from '../services/adresses/listAdresses.service'
 import deleteAdressesService from '../services/adresses/deleteAdresses.service'
 import updateAdressesService from '../services/adresses/updateAdresses.services'
 
+import jwt from "jsonwebtoken";
+
 
 export const createAdressesControler = async (req: Request, res: Response) => {
 
@@ -37,7 +39,13 @@ export const updateAdressesControler = async (req: Request, res: Response) => {
 
     const {city, state , number, cep, district} = req.body
 
-    const listAdresses =  await updateAdressesService(req.params.id,{city ,state , number, cep, district})
+    const { authorization } = req.headers;
+	const token = authorization!.split(" ")[1];
+	const { id } = jwt.decode(token) as { id: string};
+    const tokenId = id;
+    const addressId = req.params.id;
+
+    const listAdresses =  await updateAdressesService({addressId, tokenId},{city ,state , number, cep, district})
     
     return res.status(201).send(listAdresses)
 }
