@@ -22,9 +22,7 @@ const createUserService = ({ name, age, cpf, email, password, }) => __awaiter(vo
         throw new appError_1.AppError(401, "Password is a required field");
     }
     //this array syntaxt for find is the equivalent to the "or" operator
-    const userAlreadyExists = yield userRepository.findOne({
-        where: [{ email: email }, { cpf: cpf }],
-    });
+    const userAlreadyExists = yield userRepository.findOneBy({ email: email });
     console.log("ServiceFind");
     if (userAlreadyExists) {
         throw new appError_1.AppError(401, "User already exists");

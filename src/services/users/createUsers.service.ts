@@ -21,9 +21,7 @@ const createUserService = async ({
     throw new AppError(401, "Password is a required field");
   }
   //this array syntaxt for find is the equivalent to the "or" operator
-  const userAlreadyExists = await userRepository.findOne({
-    where: [{ email: email }, { cpf: cpf }],
-  });
+  const userAlreadyExists = await userRepository.findOneBy({ email: email });
   console.log("ServiceFind");
 
   if (userAlreadyExists) {
