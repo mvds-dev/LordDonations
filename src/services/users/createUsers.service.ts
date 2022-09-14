@@ -1,42 +1,48 @@
-import { AppDataSource } from '../../data-source'
-import { Users } from '../../entities/users.entity'
-import { IUserRequest } from '../../interfaces/users'
-import { AppError } from '../../erros/appError'
-import { hash } from 'bcrypt'
+import { AppDataSource } from "../../data-source";
+import { Users } from "../../entities/users.entity";
+import { IUserRequest } from "../../interfaces/users";
+import { AppError } from "../../erros/appError";
+import { hash } from "bcrypt";
 
+const createUserService = async ({
+  name,
+  age,
+  cpf,
+  email,
+  password,
+}: IUserRequest): Promise<Users> => {
+  console.log("Service");
+  const userRepository = AppDataSource.getRepository(Users);
 
-const createUserService = async ({name, age, cpf, email, password}: IUserRequest): Promise<Users> => {
+  if (!name || !age || !cpf || !email || !password) {
+    throw new AppError(400, "Request in wrong format");
+  }
 
-    const userRepository = AppDataSource.getRepository(Users);
+  if (!password) {
+    throw new AppError(401, "Password is a required field");
+  }
+  //this array syntaxt for find is the equivalent to the "or" operator
+  const userAlreadyExists = await userRepository.findOne({
+    where: [{ email: email }, { cpf: cpf }],
+  });
 
-    if(!name || !age || !cpf || !email || !password) {
-        throw new AppError(400, "Request in wrong format");
-    }
+  if (userAlreadyExists) {
+    throw new AppError(401, "User already exists");
+  }
 
-    if(!password){
-        throw new AppError(401, "Password is a required field");
-    }
-//this array syntaxt for find is the equivalent to the "or" operator
-    const userAlreadyExists = await userRepository.findOne({where: [{email: email}, {cpf: cpf}]});
+  const hashedPassword = await hash(password, 10);
 
-    if(userAlreadyExists){
-        throw new AppError(401,"User already exists");
-    }
+  const user = userRepository.create({
+    name,
+    email,
+    age,
+    cpf,
+    password: hashedPassword,
+  });
 
-    const hashedPassword = await hash(password, 10);
+  await userRepository.save(user);
 
-    const user = userRepository.create({
-        name,
-        email,
-        age,
-        cpf,
-        password: hashedPassword
-    })
+  return user;
+};
 
-    await userRepository.save(user);
-
-    return user;
-
-}
-
-export default createUserService
+export default createUserService;
