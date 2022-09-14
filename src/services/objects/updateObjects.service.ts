@@ -17,14 +17,26 @@ const updateObjectsService = async ({userId, objectId, typeId, name, description
 
 
     //checks type
+
     const typesRepository = AppDataSource.getRepository(Types);
-    let type;
-    if(typeId) {
-        type = await typesRepository.findOne({where: {id: typeId}});
-        if(!type) throw new AppError(404, "type not found");
+    const types =  await typesRepository.find();
+
+    let type ;
+
+    if(typeId){
+
+        for (let i = 0; i < types.length; i++) {
+            if (types[i].id == typeId) {
+                type = types[i]
+            }
+        }
+
+    if(!type){
+        throw new AppError(404, "type not found");
     }
 
-
+    }
+    
     await objectsRepository.update(objectId, {name, description, type});
 
 
