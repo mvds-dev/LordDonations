@@ -1,8 +1,11 @@
+import { Addresseses } from "../entities/Addresses.entities";
+
 export interface IInstitutionRequest {
 	name: string;
 	email: string;
 	cnpj: string;
 	password: string;
+	address: Addresseses;
 }
 
 export interface IInstitution {

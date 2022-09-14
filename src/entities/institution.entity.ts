@@ -45,7 +45,7 @@ export class Institutions {
 	@Column({ default: true })
 	isActive: boolean;
 
-	@OneToOne(() => Addresseses)
+	@OneToOne(() => Addresseses, (address) => address.institution)
 	@JoinColumn()
 	address: Addresseses;
 
