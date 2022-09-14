@@ -12,29 +12,17 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const data_source_1 = require("../../data-source");
 const users_entity_1 = require("../../entities/users.entity");
 const appError_1 = require("../../erros/appError");
-const bcrypt_1 = require("bcrypt");
-const createUserService = ({ name, age, cpf, email, password }) => __awaiter(void 0, void 0, void 0, function* () {
+const deleteUserService = ({ id }) => __awaiter(void 0, void 0, void 0, function* () {
     const userRepository = data_source_1.AppDataSource.getRepository(users_entity_1.Users);
-    if (!name || !age || !cpf || !email || !password) {
-        throw new appError_1.AppError(400, "Request in wrong format");
+    const user = yield userRepository.findOne({ where: { id: id } });
+    if (!user) {
+        throw new appError_1.AppError(404, "User does not exist");
     }
-    if (!password) {
-        throw new appError_1.AppError(401, "Password is a required field");
+    if ((user === null || user === void 0 ? void 0 : user.isActive) == false) {
+        throw new appError_1.AppError(400, "Inactive User");
     }
-    //this array syntaxt for find is the equivalent to the "or" operator
-    const userAlreadyExists = yield userRepository.findOne({ where: [{ email: email }, { cpf: cpf }] });
-    if (userAlreadyExists) {
-        throw new appError_1.AppError(401, "User already exists");
-    }
-    const hashedPassword = yield (0, bcrypt_1.hash)(password, 10);
-    const user = userRepository.create({
-        name,
-        email,
-        age,
-        cpf,
-        password: hashedPassword
+    yield userRepository.update({ id: id }, {
+        isActive: false
     });
-    yield userRepository.save(user);
-    return user;
 });
-exports.default = createUserService;
+exports.default = deleteUserService;

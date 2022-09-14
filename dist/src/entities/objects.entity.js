@@ -27,7 +27,7 @@ __decorate([
 ], Itens.prototype, "name", void 0);
 __decorate([
     (0, typeorm_1.Column)(),
-    __metadata("design:type", Number)
+    __metadata("design:type", String)
 ], Itens.prototype, "description", void 0);
 __decorate([
     (0, typeorm_1.ManyToOne)(() => status_entity_1.Status, (Status) => Status.objects),
