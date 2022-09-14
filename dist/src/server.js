@@ -13,12 +13,8 @@ const data_source_1 = require("./data-source");
 const app_1 = require("./app");
 require("dotenv/config");
 (() => __awaiter(void 0, void 0, void 0, function* () {
-    yield data_source_1.AppDataSource.initialize()
-        .then(() => {
-        console.log("Data Source has been initialized");
-    })
-        .catch(() => {
-        console.error("Error during Data Source initalization");
+    yield data_source_1.AppDataSource.initialize().catch((err) => {
+        console.error("Error during Data Source initalization", err);
     });
     app_1.app.listen(process.env.PORT || 3000, () => console.log(`Server running at port ${process.env.PORT}!`));
 }))();
