@@ -919,3 +919,217 @@ Content-type: application/json
 
 ---
 
+## 5. **Requests**
+
+O objeto Request é definido como:
+
+| Campo         | Tipo   | Descrição                                  |
+| ------------- | ------ | ------------------------------------------ |
+| id            | uuid   | Identificador único do Request.            |
+| quantity      | number | Quantidade requisitada.                    |
+| description   | string | Uma descrição para explicar a requisição.  |
+| institutionId | uuid   | Id com a instituição que fez a requisição. |
+| typeId        | uuid   | Id com o tipo de objetos da requisição.    |
+
+### Endpoints Requests
+
+| Método | Rota                | Descrição                            |
+| ------ | ------------------- | ------------------------------------ |
+| GET    | /requests           | Lista todos os requests.             |
+| POST   | /requests           | Criação de um request.               |
+| PATCH  | /requests/:requestId | Atualiza os dados de um request.    |
+| DELETE | /requests/:requestId | Realiza um softdelete em um request.|
+
+---
+
+### 5.1. **Listando Requests**
+
+[ Voltar para os Endpoints do Request ](#endpoints-requests)
+
+### `/requests `
+
+### Exemplo de Request:
+
+```
+GET /requests
+Host: https://lord-donations.herokuapp.com/
+Authorization: None
+Content-type: application/json
+```
+
+### Corpo da Requisição:
+
+```
+Vazio
+```
+
+### Exemplo de Response:
+
+```
+200 OK
+```
+
+```json
+[
+	{
+		"id": "3867155a-d335-4182-aa62-7b0677ceb297",
+		"quantity": 1,
+		"description": "request description"
+	}
+]
+```
+
+### Possíveis Erros:
+
+Nenhum, o máximo que pode acontecer é retornar uma lista vazia.
+
+---
+
+### 5.2. **Criação de Requisições**
+
+[ Voltar para os Endpoints do Request ](#endpoints-requests)
+
+### `/requests`
+
+### Exemplo de Request:
+
+```
+POST /requests
+Host: https://lord-donations.herokuapp.com/
+Authorization: None
+Content-type: application/json
+```
+
+### Corpo da Requisição:
+
+```json
+{
+	"typeId": "0d448969-4b92-4165-88f6-ce9f46c78702",
+	"description": "request description",
+	"quantity": 1
+}
+```
+
+### Exemplo de Response:
+
+```
+201 Created
+```
+
+```json
+{
+	"id": "f11da941-4c4c-4df9-b96e-949c018f9779",
+	"quantity": 1,
+	"description": "request description",
+	"type": {
+		"id": "0d448969-4b92-4165-88f6-ce9f46c78702",
+		"name": "nome do tipo",
+		"description": "descrição do tipo",
+		"isActive": true
+	},
+	"institution": {
+		"id": "2a1198d7-03ba-418b-a7b4-e817820d780c",
+		"name": "institution",
+		"email": "institution@mail.com",
+		"cnpj": "00.000.000/0001-00",
+		"createdAt": "2022-09-12T13:59:14.489Z",
+		"updatedAt": "2022-09-12T13:59:14.489Z",
+		"isActive": true
+	}
+}
+```
+
+### Possíveis Erros:
+
+| Código do Erro  | Descrição                                           |
+| --------------- | --------------------------------------------------- |
+| 400 Bad Request | Requests must have typeId, quantity and description |
+| 400 Bad Request | Quantity must be a number and description a string  |
+| 404 Not found   | Type not found                                      |
+| 400 Bad Request | Type is not active                                  |
+| 404 Not found   | Institution not found                               |
+| 404 Not found   | Institution is not active                           |
+
+---
+
+### 5.3. **Atualização de Requisições**
+
+[ Voltar para os Endpoints do Request ](#endpoints-requests)
+
+### `/requests/:requestId`
+
+### Exemplo de Request:
+
+```
+PATCH /requests/:requestId
+Host: https://lord-donations.herokuapp.com/
+Authorization: Token
+Content-type: application/json
+```
+
+### Corpo da Requisição:
+
+```json
+{
+	"quantity": 2,
+	"description": "request description updated"
+}
+```
+
+### Exemplo de Response:
+
+```
+200 Ok
+```
+
+```json
+{
+	"message": "request updated"
+}
+```
+
+### Possíveis Erros:
+
+| Código do Erro  | Descrição             |
+| --------------- | --------------------- |
+| 400 Bad request | nothing to update     |
+| 404 Not found   | Institution not found |
+| 404 Not found   | Request not found     |
+
+---
+
+### 4.5. **Deleção de Requisições**
+
+[ Voltar para os Endpoints do Request ](#endpoints-requests)
+
+### `/requests/:requestId`
+
+### Exemplo de Request:
+
+```
+DELETE /requests/:requestId
+Host: https://lord-donations.herokuapp.com/
+Authorization: Token
+Content-type: application/json
+```
+
+### Corpo da Requisição:
+
+```
+Vazio
+```
+
+### Exemplo de Response:
+
+```
+204 No content
+```
+
+### Possíveis Erros:
+
+| Código do Erro | Descrição             |
+| -------------- | --------------------- |
+| 404 Not found  | Institution not found |
+| 404 Not found  | Request not found     |
+
+---
