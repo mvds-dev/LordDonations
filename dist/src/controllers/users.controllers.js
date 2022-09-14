@@ -20,6 +20,7 @@ const loginUsers_service_1 = __importDefault(require("../services/users/loginUse
 const updateUsers_service_1 = require("../services/users/updateUsers.service");
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 const createUserController = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    console.log("userController");
     const { name, age, cpf, email, password } = req.body;
     const user = yield (0, createUsers_service_1.default)({ name, age, cpf, email, password });
     return res.status(201).json(user);
@@ -30,7 +31,7 @@ const deleteUserController = (req, res) => __awaiter(void 0, void 0, void 0, fun
     const token = authorization.split(" ")[1];
     const { id } = jsonwebtoken_1.default.decode(token);
     yield (0, deleteUser_service_1.default)({ id });
-    return res.status(204).json('');
+    return res.status(204).json("");
 });
 exports.deleteUserController = deleteUserController;
 const listUsersController = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
@@ -43,7 +44,14 @@ const updateUsersController = (req, res) => __awaiter(void 0, void 0, void 0, fu
     const token = authorization.split(" ")[1];
     const { id } = jsonwebtoken_1.default.decode(token);
     const { name, age, email, cpf, password } = req.body;
-    const output = yield (0, updateUsers_service_1.updateUsersService)({ id, name, age, email, cpf, password });
+    const output = yield (0, updateUsers_service_1.updateUsersService)({
+        id,
+        name,
+        age,
+        email,
+        cpf,
+        password,
+    });
     return res.status(200).json(output);
 });
 exports.updateUsersController = updateUsersController;
