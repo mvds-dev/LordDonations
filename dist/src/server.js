@@ -13,7 +13,7 @@ const data_source_1 = require("./data-source");
 const app_1 = require("./app");
 require("dotenv/config");
 (() => __awaiter(void 0, void 0, void 0, function* () {
-    data_source_1.AppDataSource.initialize()
+    yield data_source_1.AppDataSource.initialize()
         .then(() => {
         console.log("Data Source has been initialized");
     })

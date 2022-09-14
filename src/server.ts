@@ -2,7 +2,7 @@ import { AppDataSource } from "./data-source";
 import { app } from "./app";
 import "dotenv/config";
 (async () => {
-  AppDataSource.initialize()
+  await AppDataSource.initialize()
     .then(() => {
       console.log("Data Source has been initialized");
     })

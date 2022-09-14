@@ -8,10 +8,10 @@ const AppDataSource = new typeorm_1.DataSource({
     url: process.env.DATABASE_URL,
     ssl: process.env.NODE === "production" ? { rejectUnauthorized: false } : false,
     entities: process.env.NODE === "production"
-        ? ["src/entities/**/*.{ts,js}"]
+        ? ["dist/src/entities/**/*.{ts,js}"]
         : ["src/entities/**/*.{ts,js}"],
     migrations: process.env.NODE === "production"
-        ? ["src/migrations/**/*.{ts,js}"]
+        ? ["dist/src/migrations/**/*.{ts,js}"]
         : ["src/migrations/**/*.{ts,js}"],
     synchronize: false,
     logging: true,
