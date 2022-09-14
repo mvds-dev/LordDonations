@@ -1098,7 +1098,7 @@ Content-type: application/json
 
 ---
 
-### 4.5. **Deleção de Requisições**
+### 5.4. **Deleção de Requisições**
 
 [ Voltar para os Endpoints do Request ](#endpoints-requests)
 
