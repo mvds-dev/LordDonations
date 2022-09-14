@@ -15,7 +15,7 @@ O objeto User é definido como:
 | age       | number  | A idade do usuário.                             |
 | cpf       | number  | O cpf do usuário.                               |
 | addressId | uuid    | Id com o endereço do usuário.                	|
-| isActive  | boolean | Define se um usuário é Administrador ou não.    |
+| isActive  | boolean | Define se um usuário está ativo ou não.    	|
 | createdAt | date    | Define a data de criação do usuário.            |
 | updatedAt | date    | Define a data de alguma atualização no usuário. |
 
