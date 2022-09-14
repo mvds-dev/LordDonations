@@ -325,3 +325,70 @@ Vazio
 Nenhum, o máximo que pode acontecer é retornar uma lista vazia.
 
 ---
+
+## 3. **Statuses**
+
+O objeto Status é definido como:
+
+| Campo     | Tipo    | Descrição                                       |
+| --------- | ------- | ----------------------------------------------- |
+| id        | uuid    | Identificador único do Status.                  |
+| name      | string  | O nome do Status.                               |
+
+### EndpointsStatus
+
+| Método | Rota         | Descrição                               |
+| ------ | ------------ | --------------------------------------- |
+| GET    | /statuses    | Lista todos os status                   |
+
+---
+
+### 3.1. **Listando os Status**
+
+[ Voltar para os Endpoints do Status ](#endpointsStatus)
+
+### `/statuses`
+
+### Exemplo de Request:
+
+```
+GET /statuses
+Host: http://localhost:3333
+Authorization: None
+Content-type: application/json
+```
+
+### Corpo da Requisição:
+
+```
+Vazio
+```
+
+### Exemplo de Response:
+
+```
+200 OK
+```
+
+```json
+[
+	{
+		"id": "158b6d32-3a92-44d6-a4ba-5b260247dee8",
+		"name": "active"
+	},
+	{
+		"id": "eb72e8d2-f07c-4cd6-827e-37c3110a521d",
+		"name": "sent"
+	},
+	{
+		"id": "f0054a06-5777-4c8b-980d-a53987ad5589",
+		"name": "received"
+	}
+]
+```
+
+### Possíveis Erros:
+
+Nenhum, o máximo que pode acontecer é retornar uma lista vazia.
+
+---
