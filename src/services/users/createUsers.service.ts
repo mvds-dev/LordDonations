@@ -12,7 +12,7 @@ const createUserService = async ({
   password,
 }: IUserRequest): Promise<Users> => {
   const userRepository = AppDataSource.getRepository(Users);
-
+  console.log("User Repository");
   if (!name || !age || !cpf || !email || !password) {
     throw new AppError(400, "Request in wrong format");
   }
@@ -21,7 +21,9 @@ const createUserService = async ({
     throw new AppError(401, "Password is a required field");
   }
   //this array syntaxt for find is the equivalent to the "or" operator
-  const userAlreadyExists = await userRepository.findOneBy({ email: email });
+  const userAlreadyExists = await userRepository.findOne({
+    where: { email },
+  });
   console.log("ServiceFind");
 
   if (userAlreadyExists) {

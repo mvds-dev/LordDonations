@@ -15,6 +15,7 @@ const appError_1 = require("../../erros/appError");
 const bcrypt_1 = require("bcrypt");
 const createUserService = ({ name, age, cpf, email, password, }) => __awaiter(void 0, void 0, void 0, function* () {
     const userRepository = data_source_1.AppDataSource.getRepository(users_entity_1.Users);
+    console.log("User Repository");
     if (!name || !age || !cpf || !email || !password) {
         throw new appError_1.AppError(400, "Request in wrong format");
     }
@@ -22,7 +23,9 @@ const createUserService = ({ name, age, cpf, email, password, }) => __awaiter(vo
         throw new appError_1.AppError(401, "Password is a required field");
     }
     //this array syntaxt for find is the equivalent to the "or" operator
-    const userAlreadyExists = yield userRepository.findOneBy({ email: email });
+    const userAlreadyExists = yield userRepository.findOne({
+        where: { email },
+    });
     console.log("ServiceFind");
     if (userAlreadyExists) {
         throw new appError_1.AppError(401, "User already exists");
