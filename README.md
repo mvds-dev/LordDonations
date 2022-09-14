@@ -325,3 +325,269 @@ Vazio
 Nenhum, o máximo que pode acontecer é retornar uma lista vazia.
 
 ---
+
+
+### 3. **Listando objects**
+
+### `GET /objects`
+
+### Exemplo de Request:
+
+```
+GET /objects
+Host: http://localhost:3333
+Authorization: None
+Content-type: application/json
+```
+
+### Corpo da Requisição:
+
+```
+Vazio
+```
+
+### Exemplo de Response:
+
+```
+200 OK
+```
+
+```json
+[
+	{
+	"id": "9bf634c5-f432-4177-9ced-b84178d2c24c",
+	"name": "blue bed sheet",
+	"description": "and old bed sheet",
+	"status": {
+	"id": "f96ce9a3-d518-4ea2-b165-93cd28865d3a",
+	"name": "active"
+	}
+]
+```
+
+### Possíveis Erros:
+
+Nenhum, o máximo que pode acontecer é retornar uma lista vazia.
+
+
+### `DELETE /delete/:objectId`
+
+### Exemplo de Request:
+
+```
+GET /objects
+Host: http://localhost:3333
+Authorization: token
+Content-type: application/json
+```
+
+### Corpo da Requisição:
+
+```
+Vazio
+```
+
+### Exemplo de Response:
+
+```
+204 no Content
+```
+
+### Possíveis Erros:
+
+| Código do Erro  | Descrição      |
+| --------------- | -------------- |
+| 404 Not found   | Object not found |
+
+### `POST /objects`
+
+### Exemplo de Request:
+
+```
+post /objects
+Host: http://localhost:3333
+Authorization: token
+Content-type: application/json
+```
+
+### Corpo da Requisição:
+
+```json
+{
+	"typeId": "15b6b215-f0df-4a39-bce3-b4f170fbae2b",
+	"name": "blue bed sheet",
+	"description": "and old bed sheet"
+}
+```
+
+### Exemplo de Response:
+
+```
+201 Created
+```
+
+```json
+{
+	"name": "blue bed sheet",
+	"description": "and old bed sheet",
+	"user": {
+		"id": "3e40f0c9-9bd9-4ab5-82b8-cf4cda8b2299",
+		"name": "test",
+		"email": "test@gmail.com",
+		"password": "$2b$10$FU6XbpQezYmTodIyZ5x9UuVm/yw9/shConYdzkwXidnSK.a2HlIK6",
+		"age": 20,
+		"cpf": "91616131",
+		"isActive": true,
+		"createdAt": "2022-09-12T12:56:20.358Z",
+		"updatedAt": "2022-09-12T12:56:20.358Z"
+	},
+	"type": {
+		"id": "15b6b215-f0df-4a39-bce3-b4f170fbae2b",
+		"name": "bed sheets",
+		"description": "People need to stay warm",
+		"isActive": true
+	},
+	"status": {
+		"id": "f96ce9a3-d518-4ea2-b165-93cd28865d3a",
+		"name": "active"
+	},
+	"id": "113b8f9f-c7e8-4a44-857b-c14c7d48222f"
+}
+```
+
+### Possíveis Erros:
+
+| Código do Erro  | Descrição      |
+| --------------- | -------------- |
+| 404 Not found   | Type not found |
+| 400 bad request | Type is not active |
+| 404 Not found   | User not found |
+| 400 bad request | User is not active |
+| 404 Not found   | status not found |
+
+### `PATCH /objects:objectId`
+
+### Exemplo de Request:
+
+```
+post /objects
+Host: http://localhost:3333
+Authorization: token
+Content-type: application/json
+```
+
+### Corpo da Requisição:
+
+```json
+{
+	"name": "1kg rice brand a",
+	"typeId": "15b6b215-f0df-4a39-bce3-b4f170fbae2b",
+	"description": "everyone needs food"
+}
+```
+
+### Exemplo de Response:
+
+```
+200 OK
+```
+
+```json
+{
+	"message": "Object updated"
+}
+
+```
+
+### Possíveis Erros:
+
+| Código do Erro  | Descrição      |
+| --------------- | -------------- |
+| 404 Not found   | object not found |
+| 400 Bad Request   | user not found |
+| 404 Not found   | user is not active |
+
+
+### `GET objects/active`
+
+### Exemplo de Request:
+
+```
+GET objects/active
+Host: http://localhost:3333
+Authorization: None
+Content-type: application/json
+```
+
+### Corpo da Requisição:
+
+```
+Vazio
+```
+
+### Exemplo de Response:
+
+```
+200 OK
+```
+
+```json
+[
+	{
+		"id": "3cfab3cd-26ee-458e-a444-489eaa406e7f",
+		"name": "1kg rice brand a",
+		"description": "everyone needs food"
+	}
+]
+```
+
+### Possíveis Erros:
+
+Nenhum, o máximo que pode acontecer é retornar uma lista vazia.
+
+
+### `GET /objects/active/:typeId`
+
+### Exemplo de Request:
+
+```
+GET /objects/active/:typeId
+Host: http://localhost:3333
+Authorization: None
+Content-type: application/json
+```
+
+### Corpo da Requisição:
+
+```
+Vazio
+```
+
+### Exemplo de Response:
+
+```
+200 OK
+```
+
+```json
+[
+	{
+	"id": "113b8f9f-c7e8-4a44-857b-c14c7d48222f",
+	"name": "1kg rice brand a",
+	"description": "everyone needs food",
+	"type": {
+		"id": "15b6b215-f0df-4a39-bce3-b4f170fbae2b",
+		"name": "bed sheets",
+		"description": "People need to stay warm",
+		"isActive": true
+	}
+]
+```
+
+### Possíveis Erros:
+
+| Código do Erro  | Descrição      |
+| --------------- | -------------- |
+| 404 Not found   | Invalid type |
+| 404 Not found   | No objects found |
+
