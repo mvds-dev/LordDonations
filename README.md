@@ -284,7 +284,7 @@ O objeto types é definido como:
 
 ### 2.1. **Listando Types**
 
-[ Voltar para os Endpoints do Endpoints ](#EndpointsTypes)
+[ Voltar para os Endpoints do Types ](#EndpointsTypes)
 
 ### `/types`
 
