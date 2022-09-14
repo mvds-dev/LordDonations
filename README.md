@@ -8,12 +8,13 @@ O objeto User é definido como:
 
 | Campo     | Tipo    | Descrição                                       |
 | --------- | ------- | ----------------------------------------------- |
-| id        | string  | Identificador único do usuário.                 |
+| id        | uuid    | Identificador único do usuário.                 |
 | name      | string  | O nome do usuário.                              |
 | email     | string  | O e-mail do usuário.                            |
 | password  | string  | A senha de acesso do usuário.                   |
 | age       | number  | A idade do usuário.                             |
 | cpf       | number  | O cpf do usuário.                               |
+| addressId | uuid    | Id com o endereço do usuário.                	|
 | isActive  | boolean | Define se um usuário é Administrador ou não.    |
 | createdAt | date    | Define a data de criação do usuário.            |
 | updatedAt | date    | Define a data de alguma atualização no usuário. |
