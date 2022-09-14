@@ -102,7 +102,7 @@ Content-type: application/json
 
 ### Corpo da Requisição:
 
-```json
+```
 Vazio
 ```
 
@@ -243,7 +243,7 @@ Content-type: application/json
 
 ### Corpo da Requisição:
 
-```json
+```
 Vazio
 ```
 
