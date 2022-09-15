@@ -20,6 +20,6 @@ app.get("/error", (req: Request, res: Response) => {
 });
 
 appRoutes(app);
-// app.use(errorHandlingMiddleware);
+app.use(errorHandlingMiddleware);
 
 export { app };
