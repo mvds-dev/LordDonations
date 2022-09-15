@@ -29,8 +29,8 @@ export const mockedUserLogin: IUserLogin = {
   password: "123456",
 };
 
-export const mockedUser2Login: IUserLogin = {
-  email: "test_2@mail.com",
+export const mockedUser2Login = {
+  email: "test_1@mail.com",
   password: "1234567",
 };
 export const mockedInstitution: IInstitutionRequest = {
