@@ -66,7 +66,7 @@ export const mockedFailInstitution = {
   },
 };
 export const mockedLoginInstitution: IInstitutionLogin = {
-  email: "instituiçãoTest_1",
+  email: "astronomia@mail.com",
   password: "123456",
 };
 
