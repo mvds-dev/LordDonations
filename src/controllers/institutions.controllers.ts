@@ -6,6 +6,7 @@ import institutionsListService from "../services/institutions/institutionsList.s
 import institutionUpdateService from "../services/institutions/institutionUpdate.service";
 import { classToPlain, instanceToPlain } from "class-transformer";
 import institutionDonationService from "../services/institutions/institutionsDonations.service";
+import { listSentObjectsService } from "../services/institutions/listSentObjects.service";
 
 
 import jwt from "jsonwebtoken";
@@ -108,4 +109,14 @@ export const institutionReceivesObjectController = async (req: Request, res: Res
 
 	const output = await institutionReceivesObjectService(objectId, institutionId);
 	return res.status(200).json(output);
+}
+
+export const listSentObjectsController = async (req: Request, res: Response) => {
+	const { authorization } = req.headers;
+	const token = authorization!.split(" ")[1];
+    const { id } = jwt.decode(token) as {id: string};
+	const institutionId = id
+
+	const output = await listSentObjectsService({institutionId});
+	return res.json(output);
 }

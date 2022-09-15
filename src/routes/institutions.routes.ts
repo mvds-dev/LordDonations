@@ -7,6 +7,7 @@ import {
 	institutionsListController,
 	institutionUpdateController,
 	listDonatedObjectsController,
+	listSentObjectsController,
 } from "../controllers/institutions.controllers";
 import { verifyInstitutionAuthMiddleware } from "../middlewares/verifyInstitutionAuth.middleware";
 import { Express } from "express";
@@ -32,6 +33,7 @@ const institutionsRoutes = (app: Express) => {
 	);
 	app.post("/institutions/donations/:id", verifyInstitutionAuthMiddleware, institutionDonationController)
 	app.patch("/institutions/donations/received/:objectId", verifyInstitutionAuthMiddleware, institutionReceivesObjectController);
+	app.get("/institutions/donations/pending", verifyInstitutionAuthMiddleware, listSentObjectsController);
 };
 
 export { institutionsRoutes };
