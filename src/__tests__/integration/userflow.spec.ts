@@ -3,6 +3,8 @@ import { AppDataSource } from "../../data-source";
 import request from "supertest";
 import {
   mockedInstitution,
+  mockedTypeSend,
+  mockedTypeSendFail,
   mockedUser,
   mockedUser2Login,
   mockedUserFail,
@@ -43,26 +45,32 @@ describe("/user", () => {
     const response = await request(app).post("/users").send(mockedUser);
 
     expect(response.body).toHaveProperty("message");
-    expect(response.status).toBe(400);
+    expect(response.status).toBe(401);
   });
   test("POST /users - invalid input user", async () => {
     const response = await request(app).post("/users").send(mockedUser);
 
     expect(response.body).toHaveProperty("message");
-    expect(response.status).toBe(400);
+    expect(response.status).toBe(401);
   });
-  test("POST /Login - get a user by ID", async () => {
-    const response = await request(app).get("/login").send(mockedUserLogin);
+  test("POST /users/login - get a user by ID", async () => {
+    const response = await request(app)
+      .get("/users/login")
+      .send(mockedUserLogin);
     expect(response.body).toHaveProperty("token");
     expect(response.status).toBe(200);
   });
-  test("POST /Login - invalid login", async () => {
-    const response = await request(app).post("/login").send(mockedUser2Login);
+  test("POST /users/login - invalid login", async () => {
+    const response = await request(app)
+      .post("/users/login")
+      .send(mockedUser2Login);
     expect(response.body).toHaveProperty("message");
     expect(response.status).toBe(400);
   });
-  test("/POST /Login - Missing login password", async () => {
-    const response = await request(app).post("login").send({ name: "Test_01" });
+  test("/POST /users/login - Missing login password", async () => {
+    const response = await request(app)
+      .post("/users/login")
+      .send({ name: "Test_01" });
     expect(response.body).toHaveProperty("message");
     expect(response.status).toBe(400);
   });
@@ -97,4 +105,28 @@ describe("/user", () => {
     expect(response.body.email).toEqual("test_01@mail.com");
     expect(response.status).toBe(200);
   });
+  test("Get /users/:id - invalid id", async () => {
+    const response = await request(app).get(
+      "/users/e57fd7d8-a27d-4ba5-a512-106d31c604c6"
+    );
+
+    expect(response.body).toHaveProperty("message");
+    expect(response.status).toBe(400);
+  });
+  test("POST /type - create a type for objects", async () => {
+    const response = await request(app).post("/type").send(mockedTypeSend);
+    id = response.body.id;
+    expect(response.body).toHaveProperty("name");
+    expect(response.body).toHaveProperty("id");
+    expect(response.body).toHaveProperty("description");
+    expect(response.status).toBe(201);
+  });
+  test("POST /type - invalid type creation", async () => {
+    const response = await request(app).post("/type").send(mockedTypeSendFail);
+    expect(response.body).toHaveProperty("message");
+    expect(response.status).toBe(400);
+  });
+  // test("POST /object - create object", async () => {
+  //   const response = await request(app).post("/type").send();
+  // });
 });

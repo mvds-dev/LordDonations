@@ -1,7 +1,12 @@
-import { IInstitutionRequest } from "../../interfaces/institutions";
+import {
+  IInstitutionLogin,
+  IInstitutionRequest,
+} from "../../interfaces/institutions";
 import { IStatusUpdate } from "../../interfaces/statuses";
 import { IUserLogin, IUserRequest } from "../../interfaces/users";
 import { IadressesCreate } from "../../interfaces/adresses";
+import { ITypesCreate } from "../../interfaces/ITypesCreate.interface";
+import { ICreateObjects } from "../../interfaces/objects";
 
 export const mockedUser: IUserRequest = {
   name: "Test_01",
@@ -59,4 +64,25 @@ export const mockedFailInstitution = {
     cep: "60321-321",
     district: "Diamar",
   },
+};
+export const mockedLoginInstitution: IInstitutionLogin = {
+  email: "instituiçãoTest_1",
+  password: "123456",
+};
+
+export const mockedTypeSend: ITypesCreate = {
+  name: "Sheets",
+  description: "Make people warm in cold nights",
+};
+
+export const mockedTypeSendFail = {
+  name: 1234,
+  description: "Make people warm in cold nights",
+};
+
+export const mockedObject: ICreateObjects = {
+  userId: "",
+  typeId: "",
+  name: "",
+  description: "",
 };
