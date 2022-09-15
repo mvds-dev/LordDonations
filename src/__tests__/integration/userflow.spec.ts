@@ -57,7 +57,12 @@ describe("/user", () => {
     expect(response.status).toBe(200);
   });
   test("POST /Login - invalid login", async () => {
-    const response = await request(app).get("/login").send(mockedUser2Login);
+    const response = await request(app).post("/login").send(mockedUser2Login);
+    expect(response.body).toHaveProperty("message");
+    expect(response.status).toBe(400);
+  });
+  test("/POST /Login - Missing login password", async () => {
+    const response = await request(app).post("login").send({ name: "Test_01" });
     expect(response.body).toHaveProperty("message");
     expect(response.status).toBe(400);
   });
@@ -75,6 +80,21 @@ describe("/user", () => {
     expect(response.body[0]).not.toHaveProperty("Password");
     expect(response.body[0].name).toEqual("Test_01");
     expect(response.body[0].email).toEqual("test_01@mail.com");
+    expect(response.status).toBe(200);
+  });
+  test("Get /users/:id - select user by ID", async () => {
+    const response = await request(app).get(`/users/${id}`);
+    expect(response.body).toHaveProperty("name");
+    expect(response.body).toHaveProperty("id");
+    expect(response.body).toHaveProperty("email");
+    expect(response.body).toHaveProperty("cpf");
+    expect(response.body).toHaveProperty("createdAt");
+    expect(response.body).toHaveProperty("updatedAt");
+    expect(response.body).toHaveProperty("age");
+    expect(response.body).toHaveProperty("isActive");
+    expect(response.body).not.toHaveProperty("password");
+    expect(response.body.name).toEqual("Test_01");
+    expect(response.body.email).toEqual("test_01@mail.com");
     expect(response.status).toBe(200);
   });
 });
