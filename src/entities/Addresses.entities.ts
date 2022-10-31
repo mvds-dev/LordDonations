@@ -1,5 +1,6 @@
-import { Entity, Column, PrimaryColumn } from 'typeorm'
+import { Entity, Column, PrimaryColumn, OneToOne } from 'typeorm'
 import { v4 as uuid } from 'uuid'
+import { Institutions } from './institution.entity'
 
 @Entity()
 export class Addresseses {
@@ -21,6 +22,10 @@ export class Addresseses {
 
     @Column()
     district: string
+
+    @OneToOne((type) => Institutions, (institution) => institution.address)
+    institution: Institutions
+
 
     constructor() {
         if (!this.id) {

@@ -1,42 +1,54 @@
-import { Column, Entity, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn ,OneToMany, OneToOne,JoinColumn} from "typeorm";
+import {
+	Column,
+	Entity,
+	PrimaryGeneratedColumn,
+	CreateDateColumn,
+	UpdateDateColumn,
+	OneToMany,
+	OneToOne,
+	JoinColumn,
+} from "typeorm";
 import { Addresseses } from "./Addresses.entities";
 import { Requests } from "./requests.entity";
 import { Itens } from "./objects.entity";
+import { Exclude } from "class-transformer";
 
 @Entity("institutions")
 export class Institutions {
-  @PrimaryGeneratedColumn("uuid")
-  id: string;
+	@PrimaryGeneratedColumn("uuid")
+	id: string;
 
-  @Column()
-  name: string;
+	@Column()
+	name: string;
 
-  @Column({ unique: true })
-  email: string;
-  
-  @Column()
-  cnpj: string;
+	@Column({ unique: true })
+	email: string;
 
-  @Column()
-  password: string;
+	@Column()
+	cnpj: string;
 
-  @CreateDateColumn({name: "createAt"})
-  createdAt: Date;
+	@Column()
+	@Exclude({ toPlainOnly: true })
+	password: string;
 
-  @UpdateDateColumn({name: "updatedAt"})
-  updatedAt: Date;
+	@CreateDateColumn({ name: "createAt" })
+	createdAt: Date;
 
-  @OneToMany((type) => Requests, (requests) => requests.institution, {onDelete: "SET NULL"})
-  requests: Requests[];
+	@UpdateDateColumn({ name: "updatedAt" })
+	updatedAt: Date;
 
-  @Column({ default: true })
-  isActive: boolean;
+	@OneToMany((type) => Requests, (requests) => requests.institution, {
+		onDelete: "SET NULL",
+	})
+	requests: Requests[];
 
-  @OneToOne(() => Addresseses, {
-    eager: true //,onDelete:"CASCADE"
-})@JoinColumn()
-address: Addresseses
+	@Column({ default: true })
+	isActive: boolean;
 
-  @OneToMany(()=> Itens, Itens => Itens.institution)
-  objects: Itens[]
+	@OneToOne(() => Addresseses, (address) => address.institution)
+	@JoinColumn()
+	address: Addresseses;
+
+	@OneToMany(() => Itens, (Itens) => Itens.institution)
+	objects: Itens[];
 }
